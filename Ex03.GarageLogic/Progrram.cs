@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class Progrram
+    class Progrram
     {
+        public static void Main()
+        {
+            Gasoline gasoline = new Gasoline(GasType.e_GasType.Octan95, 15.0f, 30.0f);
+            Car c1 = new Car(Color.e_Color.black, DoorsNumber.e_DoorsNumber.Four, gasoline, "BYD", "335Bd5E", 50.0f); // Problema
+        }
     }
 }
