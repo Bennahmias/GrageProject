@@ -8,9 +8,9 @@ namespace Ex03.GarageLogic
     {
         protected String m_ModelName;
         protected String m_LicenseNumber;
+        protected EnergyType m_EnergyType;
         protected float m_LeftEnergy;
         protected List<Wheel> m_VehicleWheels;
-        protected EnergyType m_EnergyType;
 
         public Vehicle(String i_ModelName, String i_LicenseNumber, float i_LeftEnergy)
         {

@@ -47,6 +47,7 @@
     <Compile Include="GenerateVehicleObject.cs" />
     <Compile Include="LicenseType.cs" />
     <Compile Include="Motorcycle.cs" />
+    <Compile Include="Progrram.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleFile.cs" />
