@@ -43,7 +43,6 @@
     <Compile Include="EnergyType.cs" />
     <Compile Include="Garage.cs" />
     <Compile Include="Gasoline.cs" />
-    <Compile Include="GasType.cs" />
     <Compile Include="GenerateVehicleObject.cs" />
     <Compile Include="LicenseType.cs" />
     <Compile Include="Motorcycle.cs" />
