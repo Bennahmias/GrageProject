@@ -15,9 +15,41 @@ namespace Ex03.GarageLogic
 
         public Vehicle(string i_LicenseNumber, EnergyType i_EnergyType)
         {
+            if (String.IsNullOrEmpty(i_LicenseNumber))
+            {
+                throw new ArgumentException("License number cannot be null or empty");
+            }
             m_LicenseNumber = i_LicenseNumber;
             m_EnergyType = i_EnergyType;
+            m_VehicleWheels = new List<Wheel>();
         }
+
+        public string LicenseNumber { get; set; }
+        public EnergyType EnergyType { get;}
+
+        public string ModelName
+        {
+            get { return m_ModelName; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentException("Model Name cannot be null or empty");
+                }
+                m_ModelName = value;
+            }
+        }
+        public float PercentLeftEnergy
+        {
+            get { return m_PercentageLeftEnergy; }
+            set
+            {
+                //TODO: implement at the norashim?
+            }
+        }
+
+
+
 
     }
 }

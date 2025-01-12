@@ -13,7 +13,6 @@ namespace Ex03.GarageLogic
         public Motorcycle(string i_LicenseNumber, EnergyType i_EnergyType) : base(i_LicenseNumber, i_EnergyType)
         {
             //TODO: check if need to do here somthing
-            m_VehicleWheels = new List<Wheel>();
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
                 m_VehicleWheels.Add(new Wheel(k_MaxAirPressureMotorcycle));

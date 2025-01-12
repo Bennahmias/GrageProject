@@ -13,10 +13,16 @@ namespace Ex03.GarageLogic
 
         public GasType.eGasType GasType { get; set;}
         
-        public override void FillEnergy()
+        public void Refueling(float i_gasolineToAdd, GasType.eGasType i_GasType)
         {
-            //TODO: to change
-            Console.WriteLine("Fill energy");
+            if (i_GasType == m_GasType && (i_gasolineToAdd + m_CurrentCapacity <= m_MaxCapacity))
+            {
+                m_CurrentCapacity += i_gasolineToAdd;
+            }
+            else
+            {
+                //TODO: trow exception of ValueOutOfRangeException
+            }
         }
     }
 }

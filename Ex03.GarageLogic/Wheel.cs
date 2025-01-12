@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
         public float CurrentAirPressure { get; set; }
         public float MaxAirPressure { get; set; }
         
-        public void inflating(float i_AddAirToWheel) 
+        public void Inflating(float i_AddAirToWheel) 
         {
             if (CurrentAirPressure + i_AddAirToWheel <= MaxAirPressure)
             {
@@ -27,6 +27,11 @@ namespace Ex03.GarageLogic
             {
                 //TODO: comment ot exception?
             }
+        }
+
+        public void InflatingToMax(float i_MaxAirPressure)
+        {
+            m_MaxAirPressure = i_MaxAirPressure;
         }
         
     }

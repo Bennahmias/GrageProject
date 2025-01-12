@@ -12,11 +12,14 @@ namespace Ex03.GarageLogic
 
         public Truck(string i_LicenseNumber, EnergyType i_EnergyType) : base(i_LicenseNumber, i_EnergyType)
         {
-            m_VehicleWheels = new List<Wheel>();
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
                 m_VehicleWheels.Add(new Wheel(k_MaxAirPressureTruck));
             }
         }
+
+        public bool TransportingRefrigeratedMaterials { get; set; }
+        public float CargoVolume { get; set ; } 
+
     }
 }

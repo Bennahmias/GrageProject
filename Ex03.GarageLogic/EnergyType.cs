@@ -5,13 +5,17 @@ namespace Ex03.GarageLogic
 {
     public abstract class EnergyType
     {
-        protected float m_maxCapacity;
-        protected float m_CurrentCapacity;
+        protected float m_MaxCapacity;
+        protected float m_CurrentCapacity = 0.0f;
 
         public EnergyType(float i_MaxCapacity)
         {
-            m_maxCapacity = i_MaxCapacity;
+            m_MaxCapacity = i_MaxCapacity;
         }
-        public abstract void FillEnergy();
+
+        public float MaxCapacity { get; }
+        public float CurrentCapacity { get; set; }
+
+
     }
 }
