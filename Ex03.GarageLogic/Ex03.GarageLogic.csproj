@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
@@ -43,7 +46,7 @@
     <Compile Include="EnergyType.cs" />
     <Compile Include="Garage.cs" />
     <Compile Include="Gasoline.cs" />
-    <Compile Include="GenerateVehicleObject.cs" />
+    <Compile Include="GenerateVehicles.cs" />
     <Compile Include="LicenseType.cs" />
     <Compile Include="Motorcycle.cs" />
     <Compile Include="Progrram.cs" />

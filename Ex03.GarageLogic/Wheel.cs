@@ -4,17 +4,19 @@ namespace Ex03.GarageLogic
 {
     public struct Wheel
     {
-        public String ManufacturerName { get; set; }
-        public float CurrentAirPressure { get; set; }
-        public float MaxAirPressure { get; set; }
+        private string m_ManufacturerName;
+        private float m_CurrentAirPressure;
+        private float m_MaxAirPressure;
 
-        public Wheel(float i_CurrentAirPressure, float i_MaxAirPressure, String i_ManufacturerName)
+        public Wheel(float i_MaxAirPressure)
         {
-            CurrentAirPressure = i_CurrentAirPressure;
             MaxAirPressure = i_MaxAirPressure;
-            ManufacturerName = i_ManufacturerName;
         }
 
+        public string ManufacturerName { get; set; }
+        public float CurrentAirPressure { get; set; }
+        public float MaxAirPressure { get; set; }
+        
         public void inflating(float i_AddAirToWheel) 
         {
             if (CurrentAirPressure + i_AddAirToWheel <= MaxAirPressure)

@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
 {
     public class Color
     {
-        public enum e_Color
+        public enum eColor
         {
             blue, 
             black, 

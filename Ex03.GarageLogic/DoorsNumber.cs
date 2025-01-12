@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
 {
     public class DoorsNumber
     {
-        public enum e_DoorsNumber
+        public enum eDoorsNumber
         {
             Two,
             Three,

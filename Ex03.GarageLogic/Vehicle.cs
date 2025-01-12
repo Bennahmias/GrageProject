@@ -6,23 +6,18 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        protected String m_ModelName;
-        protected String m_LicenseNumber;
+        //אין צורך לשים בקונסטרטור אתחול לכל המשתנים יש לזה גם חסרונות אלא רק הדברים שלא הולכים להשתנות מררגע היצירה עד הסוף
+        protected string m_ModelName;
+        protected string m_LicenseNumber;
         protected EnergyType m_EnergyType;
-        protected float m_PercentLeftEnergy;
-        protected List<Wheel> m_VehicleWheels; //האם ליסט או מערך בעצם?
+        protected float m_PercentageLeftEnergy;
+        protected List<Wheel> m_VehicleWheels;
 
-        public Vehicle(String i_ModelName, String i_LicenseNumber, float i_PercentLeftEnergy,float i_CurrentAirPressure, float i_MaxAirPressure,
-            int i_NumberOfWheels, String i_ManufacturerName)
+        public Vehicle(string i_LicenseNumber, EnergyType i_EnergyType)
         {
-            m_ModelName = i_ModelName;
             m_LicenseNumber = i_LicenseNumber;
-            m_PercentLeftEnergy = i_PercentLeftEnergy;
-            m_VehicleWheels = new List<Wheel>();
-            for (int i = 0; i < i_NumberOfWheels; i++)
-            {
-                m_VehicleWheels.Add(new Wheel(i_CurrentAirPressure,i_MaxAirPressure, i_ManufacturerName));
-            }
+            m_EnergyType = i_EnergyType;
         }
+
     }
 }
