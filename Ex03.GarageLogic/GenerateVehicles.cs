@@ -55,8 +55,7 @@ namespace Ex03.GarageLogic
             return energyType;
         }
 
-        public static Vehicle BuildNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType,
-            EnergyType i_EnergyType)
+        public static Vehicle BuildNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType)
         {
             Vehicle newVehicle;
 
@@ -64,14 +63,14 @@ namespace Ex03.GarageLogic
             {
                 case VehicleType.eVehicleType.GasolineCar:
                 case VehicleType.eVehicleType.ElectricCar:
-                    newVehicle = new Car(i_LicenseNumber, i_EnergyType);
+                    newVehicle = new Car(i_LicenseNumber, CreateEnergyType(i_VehicleType));
                     break;
                 case VehicleType.eVehicleType.GasolineMotorcycle:
                 case VehicleType.eVehicleType.ElectricMotorcycle:
-                    newVehicle = new Motorcycle(i_LicenseNumber, i_EnergyType);
+                    newVehicle = new Motorcycle(i_LicenseNumber, CreateEnergyType(i_VehicleType));
                     break;
                 case VehicleType.eVehicleType.GasolineTruck:
-                    newVehicle = new Truck(i_LicenseNumber, i_EnergyType);
+                    newVehicle = new Truck(i_LicenseNumber, CreateEnergyType(i_VehicleType));
                     break;
                 default:
                     throw new ArgumentException(); //TODO: add args to this exception

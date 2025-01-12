@@ -11,6 +11,7 @@ namespace Ex03.GarageLogic
 
         public VehicleFile(string i_OwnerName, string i_PhoneNumber)
         {
+            //TODO : Exceptions.
             m_OwnerName = i_OwnerName;
             m_PhoneNumber = i_PhoneNumber;
             m_Status = VehicleStatus.eVehicleStatus.InRepair;

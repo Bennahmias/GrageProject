@@ -6,11 +6,11 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string,VehicleFile> m_VehicleFilesList;
+        private Dictionary<string,VehicleFile> m_VehicleFilesDict;
 
         public Garage()
         {
-            m_VehicleFilesList = new Dictionary<string,VehicleFile>();
+            m_VehicleFilesDict = new Dictionary<string,VehicleFile>();
         }
 
         public void AddVehicleToGarage(string i_LicenseNumber, int i_VehicleTypeNumber, string i_OwnerName, string i_PhoneNumber)
@@ -19,12 +19,12 @@ namespace Ex03.GarageLogic
             VehicleType.eVehicleType vehicleType = (VehicleType.eVehicleType)i_VehicleTypeNumber; //TODO:check if converting works
             Vehicle newVehicle = GenerateVehicles.CreateNewVehicle(i_LicenseNumber, vehicleType);
             vehicleFile.Vehicle = newVehicle;
-            m_VehicleFilesList.Add(i_LicenseNumber,vehicleFile);
+            m_VehicleFilesDict.Add(i_LicenseNumber, vehicleFile);
         }
 
         private bool checkIfVehicleInGarage(string i_LicenseNumber)
         {
-            return m_VehicleFilesList.ContainsKey(i_LicenseNumber);
+            return m_VehicleFilesDict.ContainsKey(i_LicenseNumber);
         }
 
         public void SetEnergyOfVehicle()
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
 
         public void SetWheelsDetails(string i_LicenseNumber, string i_ManufacturerName, float i_CurrentAirPressure)
         {
-            foreach (Wheel wheel in m_VehicleFilesList[i_LicenseNumber].Vehicle.VehicleWheels)
+            foreach (Wheel wheel in m_VehicleFilesDict[i_LicenseNumber].Vehicle.VehicleWheels)
             {
                 wheel.ManufacturerName = i_ManufacturerName;
                 wheel.Inflating(i_CurrentAirPressure);
@@ -43,7 +43,7 @@ namespace Ex03.GarageLogic
 
         public void SetWheelsPressureToMax(string i_LicenseNumber)
         {
-            foreach (Wheel wheel in m_VehicleFilesList[i_LicenseNumber].Vehicle.VehicleWheels)
+            foreach (Wheel wheel in m_VehicleFilesDict[i_LicenseNumber].Vehicle.VehicleWheels)
             {
                 wheel.InflatingToMax(wheel.MaxAirPressure);
             }
@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
         public void SetNewStatus(string i_LicenseNumber, int i_newStatusNumber)
         {
             VehicleStatus.eVehicleStatus newStatus = (VehicleStatus.eVehicleStatus)i_newStatusNumber; //TODO:Check if converting ok
-            m_VehicleFilesList[i_LicenseNumber].Status = newStatus;
+            m_VehicleFilesDict[i_LicenseNumber].Status = newStatus;
         }
 
         public List<string> GetListOfFilteredLicensesNumbers(int i_StatusNumber)
@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
             List<string> resultList = new List<string>();
             if (i_StatusNumber == 3) //TODO: in UI to implement that this number means no filter or think better way
             {
-                foreach (string licenseNumberKey in m_VehicleFilesList.Keys)
+                foreach (string licenseNumberKey in m_VehicleFilesDict.Keys)
                 {
                     resultList.Add(licenseNumberKey);
                 }
@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
             else
             {
                 VehicleStatus.eVehicleStatus status = (VehicleStatus.eVehicleStatus)i_StatusNumber;
-                foreach (KeyValuePair<string,VehicleFile> vehicleFile in m_VehicleFilesList )
+                foreach (KeyValuePair<string,VehicleFile> vehicleFile in m_VehicleFilesDict )
                 {
                     if (vehicleFile.Value.Status == status)
                     {

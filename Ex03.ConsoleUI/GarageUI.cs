@@ -16,11 +16,5 @@ namespace Ex03.ConsoleUI
         }
 
 
-
-
-
-
-
-
     }
 }
