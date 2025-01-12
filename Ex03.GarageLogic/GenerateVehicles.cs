@@ -17,17 +17,17 @@ namespace Ex03.GarageLogic
         //בעולם האמיתי קודם מייצרים מכונית ואז מוסיפים לה אוויר בגלגלים וכו וכו
 
 
-        public static Vehicle GenerateNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType)
+        public static Vehicle CreateNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType)
         {
             //TODO: exception if not in range
 
-            EnergyType energyType = createEnergyType(i_VehicleType);
-            Vehicle vehicle = CreateNewVehicle(i_LicenseNumber, i_VehicleType, energyType);
+            EnergyType energyType = CreateEnergyType(i_VehicleType);
+            Vehicle vehicle = BuildNewVehicle(i_LicenseNumber, i_VehicleType, energyType);
 
             return vehicle;
         }
 
-        public static EnergyType createEnergyType(VehicleType.eVehicleType i_VehicleType)
+        public static EnergyType CreateEnergyType(VehicleType.eVehicleType i_VehicleType)
         {
             EnergyType energyType;
 
@@ -55,7 +55,7 @@ namespace Ex03.GarageLogic
             return energyType;
         }
 
-        public static Vehicle CreateNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType,
+        public static Vehicle BuildNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType,
             EnergyType i_EnergyType)
         {
             Vehicle newVehicle;

@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
             //Car c1 = new Car(Color.eColor.black, DoorsNumber.eDoorsNumber.Four, gasoline, "BYD", "335Bd5E", 50.0f,34.0f,
             //  34.0f); // Problema 2
             //Vehicle c1 = new Car("L45E80", new Gasoline(GasType.eGasType.Octan95, 80.8f));
-            GenerateVehicles.GenerateNewVehicle("12345", VehicleType.eVehicleType.ElectricCar);
+            GenerateVehicles.CreateNewVehicle("12345", VehicleType.eVehicleType.ElectricCar);
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Ex03.GarageLogic
         protected string m_ModelName;
         protected string m_LicenseNumber;
         protected EnergyType m_EnergyType;
-        protected float m_PercentageLeftEnergy;
         protected List<Wheel> m_VehicleWheels;
 
         public Vehicle(string i_LicenseNumber, EnergyType i_EnergyType)
@@ -39,15 +38,8 @@ namespace Ex03.GarageLogic
                 m_ModelName = value;
             }
         }
-        public float PercentLeftEnergy
-        {
-            get { return m_PercentageLeftEnergy; }
-            set
-            {
-                //TODO: implement at the norashim?
-            }
-        }
 
+        public List<Wheel> VehicleWheels { get; set; }
 
 
 

@@ -52,6 +52,7 @@
     <Compile Include="Motorcycle.cs" />
     <Compile Include="Progrram.cs" />
     <Compile Include="Truck.cs" />
+    <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleFile.cs" />
     <Compile Include="VehicleStatus.cs" />
