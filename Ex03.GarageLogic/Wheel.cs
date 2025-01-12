@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
             ManufacturerName = i_ManufacturerName;
         }
 
-        public void inflating(float i_AddAirToWheel)
+        public void inflating(float i_AddAirToWheel) 
         {
             if (CurrentAirPressure + i_AddAirToWheel <= MaxAirPressure)
             {
@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //comment ot exception?
+                //TODO: comment ot exception?
             }
         }
         
