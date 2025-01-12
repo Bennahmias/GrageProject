@@ -17,7 +17,6 @@ namespace Ex03.GarageLogic
                 m_VehicleWheels.Add(new Wheel(k_MaxAirPressureCar));
             }
         }
-
         public Color.eColor Color {get; set;}
         public DoorsNumber.eDoorsNumber DoorsNumber {get; set;}
         

@@ -19,16 +19,5 @@ namespace Ex03.GarageLogic
             Console.WriteLine("Fill energy");
         }
     }
-
-    public class GasType
-    {
-        public enum eGasType
-        {
-            Soler,
-            Octan95,
-            Octan96,
-            Octan98
-        }
-    }
 }
 
