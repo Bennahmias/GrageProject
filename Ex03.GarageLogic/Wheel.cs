@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    public struct Wheel // TODO: change to class?
+    public class Wheel // TODO: change to class?
     {
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;

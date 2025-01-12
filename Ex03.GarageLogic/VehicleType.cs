@@ -6,14 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class GasType
+    internal class VehicleType
     {
-        public enum eGasType
-        {
-            Soler,
-            Octan95,
-            Octan96,
-            Octan98
-        }
     }
 }

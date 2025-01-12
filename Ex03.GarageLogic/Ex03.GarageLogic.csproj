@@ -46,6 +46,7 @@
     <Compile Include="EnergyType.cs" />
     <Compile Include="Garage.cs" />
     <Compile Include="Gasoline.cs" />
+    <Compile Include="GasType.cs" />
     <Compile Include="GenerateVehicles.cs" />
     <Compile Include="LicenseType.cs" />
     <Compile Include="Motorcycle.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Truck.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleFile.cs" />
+    <Compile Include="VehicleType.cs" />
     <Compile Include="Wheel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
