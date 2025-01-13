@@ -67,10 +67,10 @@ namespace Ex03.GarageLogic
                     break;
                 case VehicleType.eVehicleType.GasolineMotorcycle:
                 case VehicleType.eVehicleType.ElectricMotorcycle:
-                    newVehicle = new Motorcycle(i_LicenseNumber, CreateEnergyType(i_VehicleType));
+                    newVehicle = new Motorcycle(i_LicenseNumber, CreateEnergyType(i_VehicleType)); // TODO :: Check that we throw exeptions.
                     break;
                 case VehicleType.eVehicleType.GasolineTruck:
-                    newVehicle = new Truck(i_LicenseNumber, CreateEnergyType(i_VehicleType));
+                    newVehicle = new Truck(i_LicenseNumber, CreateEnergyType(i_VehicleType));  // TODO :: Check that we throw exeptions.
                     break;
                 default:
                     throw new ArgumentException(); //TODO: add args to this exception

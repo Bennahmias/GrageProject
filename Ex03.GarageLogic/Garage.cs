@@ -1,28 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string,VehicleFile> m_VehicleFilesDict;
+        private Dictionary<string, VehicleFile> m_VehicleFilesDict;
 
         public Garage()
         {
-            m_VehicleFilesDict = new Dictionary<string,VehicleFile>();
+            m_VehicleFilesDict = new Dictionary<string, VehicleFile>();
         }
 
-        public void AddVehicleToGarage(string i_LicenseNumber, int i_VehicleTypeNumber, string i_OwnerName, string i_PhoneNumber)
+        public void AddVehicleToGarage(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleTypeNumber, string i_OwnerName, string i_PhoneNumber)
         {
-            VehicleFile vehicleFile = new VehicleFile(i_OwnerName, i_PhoneNumber);
-            VehicleType.eVehicleType vehicleType = (VehicleType.eVehicleType)i_VehicleTypeNumber; //TODO:check if converting works
-            Vehicle newVehicle = GenerateVehicles.CreateNewVehicle(i_LicenseNumber, vehicleType);
-            vehicleFile.Vehicle = newVehicle;
-            m_VehicleFilesDict.Add(i_LicenseNumber, vehicleFile);
+            if (vehicleInGarage(i_LicenseNumber))
+            {
+                throw new InvalidOperationException("Error, this vechile is already exist in the garage"); // 
+            }
+            else
+            {
+                VehicleFile vehicleFile = new VehicleFile(i_OwnerName, i_PhoneNumber);
+                Vehicle newVehicle = GenerateVehicles.CreateNewVehicle(i_LicenseNumber, i_VehicleTypeNumber);
+                vehicleFile.Vehicle = newVehicle;
+                m_VehicleFilesDict.Add(i_LicenseNumber, vehicleFile);
+            }
         }
-
-        private bool checkIfVehicleInGarage(string i_LicenseNumber)
+        private bool vehicleInGarage(string i_LicenseNumber)
         {
             return m_VehicleFilesDict.ContainsKey(i_LicenseNumber);
         }
@@ -68,7 +72,7 @@ namespace Ex03.GarageLogic
             else
             {
                 VehicleStatus.eVehicleStatus status = (VehicleStatus.eVehicleStatus)i_StatusNumber;
-                foreach (KeyValuePair<string,VehicleFile> vehicleFile in m_VehicleFilesDict )
+                foreach (KeyValuePair<string, VehicleFile> vehicleFile in m_VehicleFilesDict)
                 {
                     if (vehicleFile.Value.Status == status)
                     {
@@ -76,13 +80,15 @@ namespace Ex03.GarageLogic
                     }
                 }
             }
-            
+
             return resultList;
         }
 
         //TODO: תדלוק רכב דלק
         //TODO:טעינת רכב חשמלי
-
-        
+        public Dictionary<string, VehicleFile> VehicleFilesDict
+        {
+            get { return m_VehicleFilesDict; }
+        }
     }
 }

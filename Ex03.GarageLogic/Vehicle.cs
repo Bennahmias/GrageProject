@@ -22,10 +22,8 @@ namespace Ex03.GarageLogic
             m_EnergyType = i_EnergyType;
             m_VehicleWheels = new List<Wheel>();
         }
-
         public string LicenseNumber { get; set; }
-        public EnergyType EnergyType { get;}
-
+        public EnergyType EnergyType { get; }
         public string ModelName
         {
             get { return m_ModelName; }
@@ -38,9 +36,7 @@ namespace Ex03.GarageLogic
                 m_ModelName = value;
             }
         }
-
         public List<Wheel> VehicleWheels { get; set; }
-
 
 
     }

@@ -53,7 +53,8 @@ namespace Ex03.ConsoleUI
             switch (i_UserInput)
             {
                 case MenuOptions.eMenuOptions.AddNewCar:
-                    addNewCarGetInput();
+                    // TODO: try and catch, if the vechile exist then change the status - make a new function for this task.
+                    addNewCarToTheGarage();
                     break;
                 case MenuOptions.eMenuOptions.ShowListOfLicenseNumbers:
                     //
@@ -84,7 +85,7 @@ namespace Ex03.ConsoleUI
             MenuOptions.eMenuOptions resultUserChoice;
             if (int.TryParse(userInput, out int userChoice))
             {
-                if ((userChoice >= 1) && (userChoice <= 8))
+                if ((userChoice >= MenuOptions.getMinOption()) && (userChoice <= MenuOptions.getMaxOption()))
                 {
                     resultUserChoice = (MenuOptions.eMenuOptions)userChoice;
                 }
@@ -100,12 +101,58 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
-        private void addNewCarGetInput()
+        private void addNewCarToTheGarage()
         {
-            String licenseNumber;
-            Console.Write("Please enter license car number: ");
+            String licenseNumber, ownerName, ownerPhoneNumber;
+            VehicleType.eVehicleType vechileType;
+            Console.Write("Please enter license vechile number: ");
             licenseNumber = Console.ReadLine();
+            printVechileTypeMenu();
+            vechileType = getVechileType(); // The exception will go up, greate!
+            Console.Write("Please enter owner name: ");
+            ownerName = Console.ReadLine();
+            Console.Write("Please enter owner's phone number: ");
+            ownerPhoneNumber = Console.ReadLine();
+            try
+            {
+                m_Garage.AddVehicleToGarage(licenseNumber, vechileType, ownerName, ownerPhoneNumber);
+            }
+            catch(InvalidOperationException ex) // The exception that will be catch here, is just if the vechile is already in the garage, all other exception will go up desired.
+            {
+                return; // TODO: Not so good, Guy not like it, but what the fuck we can do beside?
+            }
+            updateDetails(m_Garage.VehicleFilesDict[licenseNumber]);
+        }
+        private void printVechileTypeMenu()
+        {
+            Console.WriteLine("Please enter car type:");
+            Console.WriteLine("1. Electric car");
+            Console.WriteLine("2. Gasoline car");
+            Console.WriteLine("3. Electric motorcycle");
+            Console.WriteLine("4. Gasoline motorcycle");
+            Console.WriteLine("5. Gasoline truck");
+        }
+        private VehicleType.eVehicleType getVechileType()
+        {
+            String vechileTypeChoice = Console.ReadLine();
+            VehicleType.eVehicleType resultUserChoice;
+            if (int.TryParse(vechileTypeChoice, out int userChoice))
+            {
+                if ((userChoice >= VehicleType.getMinOption()) && (userChoice <= VehicleType.getMaxOption()))
+                {
+                    resultUserChoice = (VehicleType.eVehicleType)userChoice;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(VehicleType.getMinOption(), VehicleType.getMaxOption());
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input\n");
+            }
 
+            return resultUserChoice;
         }
     }
 }

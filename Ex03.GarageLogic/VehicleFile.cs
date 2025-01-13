@@ -7,14 +7,21 @@ namespace Ex03.GarageLogic
         private string m_OwnerName;
         private string m_PhoneNumber;
         private VehicleStatus.eVehicleStatus m_Status;
-        private Vehicle m_Vehicle;
+        private Vehicle m_Vehicle; // TODO : Delete?
 
         public VehicleFile(string i_OwnerName, string i_PhoneNumber)
         {
-            //TODO : Exceptions.
-            m_OwnerName = i_OwnerName;
-            m_PhoneNumber = i_PhoneNumber;
-            m_Status = VehicleStatus.eVehicleStatus.InRepair;
+            //TODO : Ask Ben what he think about it.
+            if (String.IsNullOrEmpty(i_OwnerName) || String.IsNullOrEmpty(i_PhoneNumber))// TODO: if we want to upgrade this func (phone number).
+            {
+                throw new ArgumentException("License number cannot be null or empty");
+            }
+            else
+            {
+                m_OwnerName = i_OwnerName;
+                m_PhoneNumber = i_PhoneNumber;
+                m_Status = VehicleStatus.eVehicleStatus.InRepair;
+            }
         }
 
         public string OwnerName { get; }
