@@ -112,7 +112,7 @@ namespace Ex03.ConsoleUI
             VehicleType.eVehicleType vechileType;
             Console.Write("Please enter license vehicle number: ");
             licenseNumber = Console.ReadLine();
-            if(!vehicleIsInTheGrage(licenseNumber))
+            if (!vehicleIsInTheGrage(licenseNumber))
             {
                 printVechileTypeMenu();
                 vechileType = getVechileType(); // The exception will go up, greate!
