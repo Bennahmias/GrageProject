@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
             //TODO: exception if not in range
 
             EnergyType energyType = CreateEnergyType(i_VehicleType);
-            Vehicle vehicle = BuildNewVehicle(i_LicenseNumber, i_VehicleType, energyType);
+            Vehicle vehicle = BuildNewVehicle(i_LicenseNumber, i_VehicleType);
 
             return vehicle;
         }
