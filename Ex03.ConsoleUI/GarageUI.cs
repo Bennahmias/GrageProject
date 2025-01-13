@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Ex03.GarageLogic;
+﻿using Ex03.GarageLogic;
+using System;
 
 namespace Ex03.ConsoleUI
 {
@@ -9,32 +7,53 @@ namespace Ex03.ConsoleUI
     {
         private Garage m_Garage;
         private bool m_ExitFromSystem;
-
         public GarageUI()
         {
             m_Garage = new Garage();
             m_ExitFromSystem = false;
         }
-
         public void RunGarage()
         {
+            bool isValidInput = false;
             GarageConsoleUI.PrintWelcome();
 
             while (!m_ExitFromSystem)
             {
+
                 GarageConsoleUI.PrintMenu();
-                MenuOptions.eMenuOptions userInput = getUserInput();
-                applyMenuOption(userInput);
-                Console.Clear();
+                MenuOptions.eMenuOptions userInput = MenuOptions.eMenuOptions.AddNewCar;
+                try
+                {
+                    userInput = getUserInput();
+                    isValidInput = true;
+                }
+                catch (Exception ex) when (ex is ArgumentException || ex is ValueOutOfRangeException)
+                {
+                    Console.Clear();
+                    Console.WriteLine(ex.Message);
+                    isValidInput = false;
+                }
+
+                if (isValidInput)
+                {
+                    try
+                    {
+                        applyMenuOption(userInput);
+                    }
+                    catch
+                    {
+
+                    }
+                    Console.Clear();
+                }
             }
         }
-
         private void applyMenuOption(MenuOptions.eMenuOptions i_UserInput)
         {
             switch (i_UserInput)
             {
                 case MenuOptions.eMenuOptions.AddNewCar:
-                    //
+                    addNewCarGetInput();
                     break;
                 case MenuOptions.eMenuOptions.ShowListOfLicenseNumbers:
                     //
@@ -59,7 +78,6 @@ namespace Ex03.ConsoleUI
                     break;
             }
         }
-
         private MenuOptions.eMenuOptions getUserInput()
         {
             string userInput = Console.ReadLine();
@@ -68,19 +86,26 @@ namespace Ex03.ConsoleUI
             {
                 if ((userChoice >= 1) && (userChoice <= 8))
                 {
-                   resultUserChoice =  (MenuOptions.eMenuOptions)userChoice;
+                    resultUserChoice = (MenuOptions.eMenuOptions)userChoice;
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(1.0f, 8.0f);
+                    throw new ValueOutOfRangeException(MenuOptions.getMinOption(), MenuOptions.getMaxOption());
                 }
             }
             else
             {
-                throw new ArgumentException("Invalid input, try again!");
+                throw new ArgumentException("Invalid input, must be a number from the menu, try again!\n");
             }
 
             return resultUserChoice;
+        }
+        private void addNewCarGetInput()
+        {
+            String licenseNumber;
+            Console.Write("Please enter license car number: ");
+            licenseNumber = Console.ReadLine();
+
         }
     }
 }
