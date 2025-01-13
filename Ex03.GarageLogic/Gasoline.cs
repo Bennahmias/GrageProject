@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
         
         public void Refueling(float i_gasolineToAdd, GasType.eGasType i_GasType)
         {
-            if (i_GasType == m_GasType && (i_gasolineToAdd + m_CurrentCapacity <= r_MaxCapacity))
+            if (i_GasType == m_GasType && (i_gasolineToAdd + m_CurrentCapacity <= MaxCapacity))
             {
                 m_CurrentCapacity += i_gasolineToAdd;
                 SetEnergyPercentage();

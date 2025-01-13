@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -14,19 +13,11 @@ namespace Ex03.GarageLogic
 
         public void AddVehicleToGarage(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleTypeNumber, string i_OwnerName, string i_PhoneNumber)
         {
-            if (vehicleInGarage(i_LicenseNumber))
-            {
-                throw new InvalidOperationException("Error, this vechile is already exist in the garage"); // 
-            }
-            else
-            {
-                VehicleFile vehicleFile = new VehicleFile(i_OwnerName, i_PhoneNumber);
-                Vehicle newVehicle = GenerateVehicles.CreateNewVehicle(i_LicenseNumber, i_VehicleTypeNumber);
-                vehicleFile.Vehicle = newVehicle;
-                m_VehicleFilesDict.Add(i_LicenseNumber, vehicleFile);
-            }
+            VehicleFile vehicleFile = new VehicleFile(i_OwnerName, i_PhoneNumber);
+            vehicleFile.Vehicle = GenerateVehicles.CreateNewVehicle(i_LicenseNumber, i_VehicleTypeNumber);
+            m_VehicleFilesDict.Add(i_LicenseNumber, vehicleFile);
         }
-        private bool vehicleInGarage(string i_LicenseNumber)
+        public bool VehicleInGarage(string i_LicenseNumber)
         {
             return m_VehicleFilesDict.ContainsKey(i_LicenseNumber);
         }
@@ -53,10 +44,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void SetNewStatus(string i_LicenseNumber, int i_newStatusNumber)
+        public void SetNewStatus(string i_LicenseNumber, VehicleStatus.eVehicleStatus i_newStatusNumber)
         {
-            VehicleStatus.eVehicleStatus newStatus = (VehicleStatus.eVehicleStatus)i_newStatusNumber; //TODO:Check if converting ok
-            m_VehicleFilesDict[i_LicenseNumber].Status = newStatus;
+            m_VehicleFilesDict[i_LicenseNumber].Status = i_newStatusNumber;
         }
 
         public List<string> GetListOfFilteredLicensesNumbers(int i_StatusNumber)

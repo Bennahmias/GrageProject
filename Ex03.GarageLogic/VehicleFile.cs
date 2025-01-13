@@ -18,14 +18,18 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                m_OwnerName = i_OwnerName;
-                m_PhoneNumber = i_PhoneNumber;
-                m_Status = VehicleStatus.eVehicleStatus.InRepair;
+                OwnerName = i_OwnerName;
+                PhoneNumber = i_PhoneNumber;
+                Status = VehicleStatus.eVehicleStatus.InRepair;
             }
         }
 
-        public string OwnerName { get; }
+        public string OwnerName { get; set; }
         public string PhoneNumber { get; set; }
+        //{
+            //get { return m_PhoneNumber; }
+            //set { m_PhoneNumber = value; }
+        //}
         public Vehicle Vehicle { get; set; }
         public VehicleStatus.eVehicleStatus Status { get; set; }
 

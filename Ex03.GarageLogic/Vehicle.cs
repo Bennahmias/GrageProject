@@ -18,12 +18,12 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("License number cannot be null or empty");
             }
-            m_LicenseNumber = i_LicenseNumber;
-            m_EnergyType = i_EnergyType;
-            m_VehicleWheels = new List<Wheel>();
+            LicenseNumber = i_LicenseNumber;
+            EnergyType = i_EnergyType;
+            VehicleWheels = new List<Wheel>();
         }
         public string LicenseNumber { get; set; }
-        public EnergyType EnergyType { get; }
+        public EnergyType EnergyType { get; set; }
         public string ModelName
         {
             get { return m_ModelName; }

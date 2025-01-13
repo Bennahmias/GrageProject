@@ -7,11 +7,11 @@ namespace Ex03.GarageLogic
     {
         public enum eVehicleType
         {
-            ElectricCar,
-            GasolineCar,
-            ElectricMotorcycle,
-            GasolineMotorcycle,
-            GasolineTruck
+            ElectricCar = 1,
+            GasolineCar = 2,
+            ElectricMotorcycle = 3,
+            GasolineMotorcycle = 4,
+            GasolineTruck = 5
         }
 
         public static int getMinOption()

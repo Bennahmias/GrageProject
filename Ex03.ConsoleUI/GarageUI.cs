@@ -39,6 +39,11 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         applyMenuOption(userInput);
+                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].OwnerName);
+                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].PhoneNumber);
+                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.ModelName);
+                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.MaxCapacity);
+                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.CurrentCapacity);
                     }
                     catch
                     {
@@ -54,7 +59,7 @@ namespace Ex03.ConsoleUI
             {
                 case MenuOptions.eMenuOptions.AddNewCar:
                     // TODO: try and catch, if the vechile exist then change the status - make a new function for this task.
-                    addNewCarToTheGarage();
+                    addNewVehicleToTheGarage();
                     break;
                 case MenuOptions.eMenuOptions.ShowListOfLicenseNumbers:
                     //
@@ -101,27 +106,23 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
-        private void addNewCarToTheGarage()
+        private void addNewVehicleToTheGarage()
         {
             String licenseNumber, ownerName, ownerPhoneNumber;
             VehicleType.eVehicleType vechileType;
-            Console.Write("Please enter license vechile number: ");
+            Console.Write("Please enter license vehicle number: ");
             licenseNumber = Console.ReadLine();
-            printVechileTypeMenu();
-            vechileType = getVechileType(); // The exception will go up, greate!
-            Console.Write("Please enter owner name: ");
-            ownerName = Console.ReadLine();
-            Console.Write("Please enter owner's phone number: ");
-            ownerPhoneNumber = Console.ReadLine();
-            try
+            if(!vehicleIsInTheGrage(licenseNumber))
             {
+                printVechileTypeMenu();
+                vechileType = getVechileType(); // The exception will go up, greate!
+                Console.Write("Please enter owner name: ");
+                ownerName = Console.ReadLine();
+                Console.Write("Please enter owner's phone number: ");
+                ownerPhoneNumber = Console.ReadLine();
                 m_Garage.AddVehicleToGarage(licenseNumber, vechileType, ownerName, ownerPhoneNumber);
+                updateDetails(m_Garage.VehicleFilesDict[licenseNumber]);
             }
-            catch(InvalidOperationException ex) // The exception that will be catch here, is just if the vechile is already in the garage, all other exception will go up desired.
-            {
-                return; // TODO: Not so good, Guy not like it, but what the fuck we can do beside?
-            }
-            updateDetails(m_Garage.VehicleFilesDict[licenseNumber]);
         }
         private void printVechileTypeMenu()
         {
@@ -153,6 +154,22 @@ namespace Ex03.ConsoleUI
             }
 
             return resultUserChoice;
+        }
+        private bool vehicleIsInTheGrage(String i_LicenseNumber)
+        {
+            bool isInTheGarage = false;
+            if (m_Garage.VehicleInGarage(i_LicenseNumber))
+            {
+                Console.WriteLine("This vehicle is already exist in the garage.");
+                m_Garage.SetNewStatus(i_LicenseNumber, VehicleStatus.eVehicleStatus.InRepair);
+                isInTheGarage = true;
+            }
+
+            return isInTheGarage;
+        }
+        private void updateDetails()
+        {
+
         }
     }
 }
