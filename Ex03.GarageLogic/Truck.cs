@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         {
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
-                m_VehicleWheels.Add(new Wheel(k_MaxAirPressureTruck));
+                VehicleWheels.Add(new Wheel(k_MaxAirPressureTruck));
             }
         }
 

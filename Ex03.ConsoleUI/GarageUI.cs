@@ -1,5 +1,9 @@
 ﻿using Ex03.GarageLogic;
 using System;
+using System.Collections;
+using System.IO;
+using System.Security.Policy;
+using System.Threading;
 
 namespace Ex03.ConsoleUI
 {
@@ -44,6 +48,8 @@ namespace Ex03.ConsoleUI
                         Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.ModelName);
                         Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.MaxCapacity);
                         Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.CurrentCapacity);
+                        Console.WriteLine(((Motorcycle)(m_Garage.VehicleFilesDict["1234"].Vehicle)).EngineDisplacement);
+                        Console.WriteLine(((Motorcycle)(m_Garage.VehicleFilesDict["1234"].Vehicle)).LicenseType);
                     }
                     catch
                     {
@@ -121,7 +127,7 @@ namespace Ex03.ConsoleUI
                 Console.Write("Please enter owner's phone number: ");
                 ownerPhoneNumber = Console.ReadLine();
                 m_Garage.AddVehicleToGarage(licenseNumber, vechileType, ownerName, ownerPhoneNumber);
-                updateDetails(m_Garage.VehicleFilesDict[licenseNumber]);
+                updateDetails(m_Garage.VehicleFilesDict[licenseNumber].Vehicle, vechileType);
             }
         }
         private void printVechileTypeMenu()
@@ -167,9 +173,145 @@ namespace Ex03.ConsoleUI
 
             return isInTheGarage;
         }
-        private void updateDetails()
+        private void updateDetails(Vehicle i_Vehicle, VehicleType.eVehicleType i_VehicleType)
         {
+            switch (i_VehicleType)
+            {
+                case VehicleType.eVehicleType.ElectricCar:
+                case VehicleType.eVehicleType.GasolineCar:
+                    updateDetailsForCar((Car)i_Vehicle);
+                    break;
+                case VehicleType.eVehicleType.ElectricMotorcycle:
+                case VehicleType.eVehicleType.GasolineMotorcycle:
+                    updateDetailsForMotorcycle((Motorcycle)i_Vehicle);
+                    break;
+                //case VehicleType.eVehicleType.GasolineTruck:
+                //    updateDetailsForTruck((Motorcycle)i_Vehicle);
+                //    break;
+            }
+        }
+        private void updateDetailsForCar(Car i_Car)
+        {
+            printColorOptions();
+            Color.eColor carColor = getCarColor();
+            i_Car.Color = carColor;
+            printDoorsOptions();
+            DoorsNumber.eDoorsNumber carDoorsNumber = getDoorsNumber();
+            i_Car.DoorsNumber = carDoorsNumber;
+        }
+        private void printColorOptions()
+        {
+            Console.WriteLine("Please enter car color: ");
+            Console.WriteLine("1. Blue");
+            Console.WriteLine("2. Black");
+            Console.WriteLine("3. Gray");
+            Console.WriteLine("4. White");
+        }
+        private Color.eColor getCarColor()
+        {
+            String carTypeChoice = Console.ReadLine();
+            Color.eColor resultUserChoice;
+            if (int.TryParse(carTypeChoice, out int userChoice))
+            {
+                if ((userChoice >= Color.getMinOption()) && (userChoice <= Color.getMaxOption()))
+                {
+                    resultUserChoice = (Color.eColor)userChoice;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(Color.getMinOption(), Color.getMaxOption());
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input\n");
+            }
 
+            return resultUserChoice;
+        }
+        private void printDoorsOptions()
+        {
+            Console.WriteLine("Please enter car's doors number: ");
+            Console.WriteLine("1. Two doors");
+            Console.WriteLine("2. Three doors");
+            Console.WriteLine("3. Four doors");
+            Console.WriteLine("4. Five doors");
+        }
+        private DoorsNumber.eDoorsNumber getDoorsNumber()
+        {
+            String carDoorChoice = Console.ReadLine();
+            DoorsNumber.eDoorsNumber resultUserChoice;
+            if (int.TryParse(carDoorChoice, out int userChoice))
+            {
+                if ((userChoice >= DoorsNumber.getMinOption()) && (userChoice <= DoorsNumber.getMaxOption()))
+                {
+                    resultUserChoice = (DoorsNumber.eDoorsNumber)userChoice;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(DoorsNumber.getMinOption(), DoorsNumber.getMaxOption());
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input\n");
+            }
+
+            return resultUserChoice;
+        }
+        private void updateDetailsForMotorcycle(Motorcycle i_Motorcycle)
+        {
+            printMotorcycleLicenseTypeOptions();
+            LicenseType.eLicenseType licenseType = getLicenseType();
+            i_Motorcycle.LicenseType = licenseType;
+            printMotorcycleEngineDisplacement();
+            i_Motorcycle.EngineDisplacement = getEngineDisplacement();
+        }
+        private void printMotorcycleLicenseTypeOptions()
+        {
+            Console.WriteLine("Please enter motorcycle's license type: ");
+            Console.WriteLine("1. A1");
+            Console.WriteLine("2. A2");
+            Console.WriteLine("3. B1");
+            Console.WriteLine("4. B2");
+        }
+        private LicenseType.eLicenseType getLicenseType()
+        {
+            String LicenseTypeChoice = Console.ReadLine();
+            LicenseType.eLicenseType resultUserChoice;
+            if (int.TryParse(LicenseTypeChoice, out int userChoice))
+            {
+                if ((userChoice >= LicenseType.getMinOption()) && (userChoice <= LicenseType.getMaxOption()))
+                {
+                    resultUserChoice = (LicenseType.eLicenseType)userChoice;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(LicenseType.getMinOption(), LicenseType.getMaxOption());
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input\n");
+            }
+
+            return resultUserChoice;
+        }
+
+        private void printMotorcycleEngineDisplacement()
+        {
+            Console.WriteLine("Please enter motorcycle's engine displacement: ");
+        }
+
+        private int getEngineDisplacement()
+        {
+            String EngineDisplacementChoice = Console.ReadLine();
+            if (!int.TryParse(EngineDisplacementChoice, out int userChoice))
+            {
+                throw new FormatException("Must be an integer.\n");
+            }
+
+            return userChoice;
         }
     }
 }

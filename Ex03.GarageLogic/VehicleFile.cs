@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
         private string m_OwnerName;
         private string m_PhoneNumber;
         private VehicleStatus.eVehicleStatus m_Status;
-        private Vehicle m_Vehicle; // TODO : Delete?
+        private Vehicle m_Vehicle;
 
         public VehicleFile(string i_OwnerName, string i_PhoneNumber)
         {
