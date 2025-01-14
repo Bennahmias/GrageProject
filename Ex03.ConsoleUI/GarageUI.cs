@@ -48,8 +48,8 @@ namespace Ex03.ConsoleUI
                         Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.ModelName);
                         Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.MaxCapacity);
                         Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.CurrentCapacity);
-                        Console.WriteLine(((Motorcycle)(m_Garage.VehicleFilesDict["1234"].Vehicle)).EngineDisplacement);
-                        Console.WriteLine(((Motorcycle)(m_Garage.VehicleFilesDict["1234"].Vehicle)).LicenseType);
+                        Console.WriteLine(((Truck)(m_Garage.VehicleFilesDict["1234"].Vehicle)).CargoVolume);
+                        Console.WriteLine(((Truck)(m_Garage.VehicleFilesDict["1234"].Vehicle)).TransportingRefrigeratedMaterials);
                     }
                     catch
                     {
@@ -92,7 +92,7 @@ namespace Ex03.ConsoleUI
         }
         private MenuOptions.eMenuOptions getUserInput()
         {
-            string userInput = Console.ReadLine();
+            String userInput = Console.ReadLine();
             MenuOptions.eMenuOptions resultUserChoice;
             if (int.TryParse(userInput, out int userChoice))
             {
@@ -185,9 +185,9 @@ namespace Ex03.ConsoleUI
                 case VehicleType.eVehicleType.GasolineMotorcycle:
                     updateDetailsForMotorcycle((Motorcycle)i_Vehicle);
                     break;
-                //case VehicleType.eVehicleType.GasolineTruck:
-                //    updateDetailsForTruck((Motorcycle)i_Vehicle);
-                //    break;
+                case VehicleType.eVehicleType.GasolineTruck:
+                    updateDetailsForTruck((Truck)i_Vehicle);
+                    break;
             }
         }
         private void updateDetailsForCar(Car i_Car)
@@ -297,18 +297,61 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
-
         private void printMotorcycleEngineDisplacement()
         {
             Console.WriteLine("Please enter motorcycle's engine displacement: ");
         }
-
         private int getEngineDisplacement()
         {
             String EngineDisplacementChoice = Console.ReadLine();
             if (!int.TryParse(EngineDisplacementChoice, out int userChoice))
             {
                 throw new FormatException("Must be an integer.\n");
+            }
+
+            return userChoice;
+        }
+
+        private void updateDetailsForTruck(Truck i_Truck)
+        {
+            printTruckTransportingRefrigeratedMaterials();
+            i_Truck.TransportingRefrigeratedMaterials = getTransportingRefrigeratedMaterials();
+            printCargoVolume();
+            i_Truck.CargoVolume = getCargoVolume();
+        }
+        private bool getTransportingRefrigeratedMaterials()
+        {
+            String transportingRefrigeratedMaterialsChoice = Console.ReadLine();
+            bool resChoice;
+            if (transportingRefrigeratedMaterialsChoice.ToUpper() == "Y")
+            {
+                resChoice =  true;
+            }
+            else if (transportingRefrigeratedMaterialsChoice.ToUpper() == "N")
+            {
+                resChoice = false;
+            }
+            else
+            {
+                throw new FormatException("Must be an Y or N.\n");
+            }
+
+            return resChoice;
+        }
+        private void printTruckTransportingRefrigeratedMaterials()
+        {
+            Console.WriteLine("Please enter if the truck transporting refrigerated materials (Y/N): ");
+        }
+        private void printCargoVolume()
+        {
+            Console.WriteLine("Please enter cargo volume: ");
+        }
+        private float getCargoVolume()
+        {
+            String cargoVolume = Console.ReadLine();
+            if (!float.TryParse(cargoVolume, out float userChoice))
+            {
+                throw new FormatException("Must be a float.\n");
             }
 
             return userChoice;
