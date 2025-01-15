@@ -43,12 +43,11 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         applyMenuOption(userInput);
-                        int x; // TODO: add readLine to return the menu.
-                        x = 8;
+                        printReturnToMenu();
                     }
                     catch
                     {
-
+                        //TODO: what
                     }
                     Console.Clear();
                 }
@@ -492,9 +491,14 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                // TODO: add print like "the licencse numbers are:"
+                Console.WriteLine("The license numbers are: "); 
                 printList(i_LicenseNumbersList);
             }
     }
-}
+        private void printReturnToMenu()
+        {
+            Console.Write("To return to the main menu, please press Enter.");
+            Console.ReadLine();
+        }
+    }
 }

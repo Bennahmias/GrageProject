@@ -10,7 +10,10 @@ namespace Ex03.GarageLogic
         {
             m_VehicleFilesDict = new Dictionary<string, VehicleFile>();
         }
-
+        public Dictionary<string, VehicleFile> VehicleFilesDict
+        {
+            get { return m_VehicleFilesDict; }
+        }
         public void AddVehicleToGarage(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleTypeNumber, string i_OwnerName, string i_PhoneNumber)
         {
             VehicleFile vehicleFile = new VehicleFile(i_OwnerName, i_PhoneNumber);
@@ -21,12 +24,10 @@ namespace Ex03.GarageLogic
         {
             return m_VehicleFilesDict.ContainsKey(i_LicenseNumber);
         }
-
         public void SetEnergyOfVehicle()
         {
             //TODO:fill, problem with polymorphism
         }
-
         public void SetWheelsDetails(string i_LicenseNumber, string i_ManufacturerName, float i_CurrentAirPressure)
         {
             foreach (Wheel wheel in m_VehicleFilesDict[i_LicenseNumber].Vehicle.VehicleWheels)
@@ -35,7 +36,6 @@ namespace Ex03.GarageLogic
                 wheel.Inflating(i_CurrentAirPressure);
             }
         }
-
         public void SetWheelsPressureToMax(string i_LicenseNumber)
         {
             foreach (Wheel wheel in m_VehicleFilesDict[i_LicenseNumber].Vehicle.VehicleWheels)
@@ -43,7 +43,6 @@ namespace Ex03.GarageLogic
                 wheel.InflatingToMax(wheel.MaxAirPressure);
             }
         }
-
         public void SetNewStatus(string i_LicenseNumber, VehicleStatus.eVehicleStatus i_newStatusNumber)
         {
             m_VehicleFilesDict[i_LicenseNumber].Status = i_newStatusNumber;
@@ -74,9 +73,6 @@ namespace Ex03.GarageLogic
 
         //TODO: תדלוק רכב דלק
         //TODO:טעינת רכב חשמלי
-        public Dictionary<string, VehicleFile> VehicleFilesDict
-        {
-            get { return m_VehicleFilesDict; }
-        }
+        
     }
 }

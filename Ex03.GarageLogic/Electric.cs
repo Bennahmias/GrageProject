@@ -7,14 +7,14 @@ namespace Ex03.GarageLogic
         public Electric(float i_MaxBatteryTime) : base(i_MaxBatteryTime) { }
         public void BatteryCharging(float i_HoursToAddToBattery)
         {
-            if (m_CurrentCapacity + i_HoursToAddToBattery <= MaxCapacity)
+            if (CurrentCapacity + i_HoursToAddToBattery <= MaxCapacity)
             {
-                m_CurrentCapacity += i_HoursToAddToBattery;
+                CurrentCapacity += i_HoursToAddToBattery;
                 SetEnergyPercentage();
             }
             else
             {
-                //TODO: trow exception of ValueOutOfRangeException
+                throw new ValueOutOfRangeException(0.0f, MaxCapacity);
             }
         }
 

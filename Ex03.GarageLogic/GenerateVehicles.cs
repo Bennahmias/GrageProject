@@ -5,18 +5,6 @@ namespace Ex03.GarageLogic
 {
     public class GenerateVehicles
     {
-        /*TODO: עושה רק שני דברים:
-         1.מחזיקה את רשימת האופציות של רכבים (5 אופציות)
-        אם נרצה להוסיף טרקטור נוסיף רק אופציה אחת
-        2. מייצרת את האובייקטים
-        עושה NEW
-        אם נרצה להוסיף טרקטור רק נעשה עוד איף אלס ונוסיף טרקטור
-         */
-        //TODO: הפניה למחלקה זו לייצר אובייקט מתבצעת אחרי שהמשתמש הזין איזה כלי רכב הוא רוצה
-        //ולפני שהוא הזין את הפרטים
-        //בעולם האמיתי קודם מייצרים מכונית ואז מוסיפים לה אוויר בגלגלים וכו וכו
-
-
         public static Vehicle CreateNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType)
         {
             //TODO: exception if not in range
@@ -26,7 +14,6 @@ namespace Ex03.GarageLogic
 
             return vehicle;
         }
-
         public static EnergyType CreateEnergyType(VehicleType.eVehicleType i_VehicleType)
         {
             EnergyType energyType;
@@ -54,7 +41,6 @@ namespace Ex03.GarageLogic
 
             return energyType;
         }
-
         public static Vehicle BuildNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType)
         {
             Vehicle newVehicle;
@@ -78,7 +64,6 @@ namespace Ex03.GarageLogic
 
             return newVehicle;
         }
-
     }
 }
 

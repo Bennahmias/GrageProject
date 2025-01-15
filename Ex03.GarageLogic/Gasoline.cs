@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO: trow exception of ValueOutOfRangeException
+                throw new ValueOutOfRangeException(0.0f, MaxCapacity);
             }
         }
     }

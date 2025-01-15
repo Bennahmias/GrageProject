@@ -2,21 +2,41 @@
 
 namespace Ex03.GarageLogic
 {
-    public class Wheel // TODO: change to class?
+    public class Wheel 
     {
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;
-        private float m_MaxAirPressure;
+        private readonly float r_MaxAirPressure;
 
         public Wheel(float i_MaxAirPressure)
         {
-            MaxAirPressure = i_MaxAirPressure;
+            r_MaxAirPressure = i_MaxAirPressure;
         }
-
-        public string ManufacturerName { get; set; }
-        public float CurrentAirPressure { get; set; } // TODO: check if not bigger ten max energy.
-        public float MaxAirPressure { get; set; }
-        
+        public string ManufacturerName
+        {
+            get { return m_ManufacturerName;}
+            set { m_ManufacturerName = value;}
+        }
+        public float CurrentAirPressure
+        {
+            get {return m_CurrentAirPressure;}
+            set
+            {
+                if (value <= MaxAirPressure)
+                {
+                    m_CurrentAirPressure = value;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(0.0f, MaxAirPressure);
+                }
+            }
+        }
+        public float MaxAirPressure
+        {
+            get { return r_MaxAirPressure;}
+            //set { m_MaxAirPressure = value; } //TODO: i dont like it that its not readonly
+        }
         public void Inflating(float i_AddAirToWheel) 
         {
             if (CurrentAirPressure + i_AddAirToWheel <= MaxAirPressure)
@@ -25,13 +45,12 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO: comment ot exception?
+                throw new ValueOutOfRangeException(0.0f, MaxAirPressure);
             }
         }
-
         public void InflatingToMax(float i_MaxAirPressure)
         {
-            m_MaxAirPressure = i_MaxAirPressure;
+            CurrentAirPressure = i_MaxAirPressure;
         }
         
     }
