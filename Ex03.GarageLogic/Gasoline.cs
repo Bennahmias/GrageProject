@@ -8,10 +8,14 @@ namespace Ex03.GarageLogic
         
         public Gasoline(GasType.eGasType i_GasType, float i_MaxFuleTank) : base (i_MaxFuleTank)
         {
-            m_GasType = i_GasType;
+            GasType = i_GasType;
         }
 
-        public GasType.eGasType GasType { get; set;}
+        public GasType.eGasType GasType
+        {
+            get { return m_GasType; }
+            set { m_GasType = value; } 
+        }
         
         public void Refueling(float i_gasolineToAdd, GasType.eGasType i_GasType)
         {

@@ -1,9 +1,7 @@
 ﻿using Ex03.GarageLogic;
 using System;
-using System.Collections;
-using System.IO;
-using System.Security.Policy;
-using System.Threading;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Ex03.ConsoleUI
 {
@@ -11,6 +9,8 @@ namespace Ex03.ConsoleUI
     {
         private Garage m_Garage;
         private bool m_ExitFromSystem;
+        private const int k_NoFilter = 0;
+
         public GarageUI()
         {
             m_Garage = new Garage();
@@ -43,13 +43,8 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         applyMenuOption(userInput);
-                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].OwnerName);
-                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].PhoneNumber);
-                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.ModelName);
-                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.MaxCapacity);
-                        Console.WriteLine(m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.CurrentCapacity);
-                        Console.WriteLine(((Truck)(m_Garage.VehicleFilesDict["1234"].Vehicle)).CargoVolume);
-                        Console.WriteLine(((Truck)(m_Garage.VehicleFilesDict["1234"].Vehicle)).TransportingRefrigeratedMaterials);
+                        int x; // TODO: add readLine to return the menu.
+                        x = 8;
                     }
                     catch
                     {
@@ -68,7 +63,7 @@ namespace Ex03.ConsoleUI
                     addNewVehicleToTheGarage();
                     break;
                 case MenuOptions.eMenuOptions.ShowListOfLicenseNumbers:
-                    //
+                    showListOfLicenseNumbers();
                     break;
                 case MenuOptions.eMenuOptions.ChangeVehicleStatus:
                     //
@@ -94,11 +89,11 @@ namespace Ex03.ConsoleUI
         {
             String userInput = Console.ReadLine();
             MenuOptions.eMenuOptions resultUserChoice;
-            if (int.TryParse(userInput, out int userChoice))
+            if (int.TryParse(userInput, out int o_UserChoice))
             {
-                if ((userChoice >= MenuOptions.getMinOption()) && (userChoice <= MenuOptions.getMaxOption()))
+                if ((o_UserChoice >= MenuOptions.getMinOption()) && (o_UserChoice <= MenuOptions.getMaxOption()))
                 {
-                    resultUserChoice = (MenuOptions.eMenuOptions)userChoice;
+                    resultUserChoice = (MenuOptions.eMenuOptions)o_UserChoice;
                 }
                 else
                 {
@@ -143,11 +138,11 @@ namespace Ex03.ConsoleUI
         {
             String vechileTypeChoice = Console.ReadLine();
             VehicleType.eVehicleType resultUserChoice;
-            if (int.TryParse(vechileTypeChoice, out int userChoice))
+            if (int.TryParse(vechileTypeChoice, out int o_UserChoice))
             {
-                if ((userChoice >= VehicleType.getMinOption()) && (userChoice <= VehicleType.getMaxOption()))
+                if ((o_UserChoice >= VehicleType.getMinOption()) && (o_UserChoice <= VehicleType.getMaxOption()))
                 {
-                    resultUserChoice = (VehicleType.eVehicleType)userChoice;
+                    resultUserChoice = (VehicleType.eVehicleType)o_UserChoice;
                 }
                 else
                 {
@@ -175,6 +170,8 @@ namespace Ex03.ConsoleUI
         }
         private void updateDetails(Vehicle i_Vehicle, VehicleType.eVehicleType i_VehicleType)
         {
+            getVehicleModelName(i_Vehicle);
+            getWheelsDetails(i_Vehicle);
             switch (i_VehicleType)
             {
                 case VehicleType.eVehicleType.ElectricCar:
@@ -188,6 +185,20 @@ namespace Ex03.ConsoleUI
                 case VehicleType.eVehicleType.GasolineTruck:
                     updateDetailsForTruck((Truck)i_Vehicle);
                     break;
+            }
+            updateEnergy(i_Vehicle);
+        }
+        private void getVehicleModelName(Vehicle i_Vehicle)
+        {
+            Console.Write("Please enter car model name: ");
+            String modelName = Console.ReadLine();
+            if (String.IsNullOrEmpty(modelName))
+            {
+                throw new ArgumentException("Model name cannot be null or empty");
+            }
+            else
+            {
+                i_Vehicle.ModelName = modelName;
             }
         }
         private void updateDetailsForCar(Car i_Car)
@@ -211,11 +222,11 @@ namespace Ex03.ConsoleUI
         {
             String carTypeChoice = Console.ReadLine();
             Color.eColor resultUserChoice;
-            if (int.TryParse(carTypeChoice, out int userChoice))
+            if (int.TryParse(carTypeChoice, out int o_UserChoice))
             {
-                if ((userChoice >= Color.getMinOption()) && (userChoice <= Color.getMaxOption()))
+                if ((o_UserChoice >= Color.getMinOption()) && (o_UserChoice <= Color.getMaxOption()))
                 {
-                    resultUserChoice = (Color.eColor)userChoice;
+                    resultUserChoice = (Color.eColor)o_UserChoice;
                 }
                 else
                 {
@@ -241,11 +252,11 @@ namespace Ex03.ConsoleUI
         {
             String carDoorChoice = Console.ReadLine();
             DoorsNumber.eDoorsNumber resultUserChoice;
-            if (int.TryParse(carDoorChoice, out int userChoice))
+            if (int.TryParse(carDoorChoice, out int o_UserChoice))
             {
-                if ((userChoice >= DoorsNumber.getMinOption()) && (userChoice <= DoorsNumber.getMaxOption()))
+                if ((o_UserChoice >= DoorsNumber.getMinOption()) && (o_UserChoice <= DoorsNumber.getMaxOption()))
                 {
-                    resultUserChoice = (DoorsNumber.eDoorsNumber)userChoice;
+                    resultUserChoice = (DoorsNumber.eDoorsNumber)o_UserChoice;
                 }
                 else
                 {
@@ -279,11 +290,11 @@ namespace Ex03.ConsoleUI
         {
             String LicenseTypeChoice = Console.ReadLine();
             LicenseType.eLicenseType resultUserChoice;
-            if (int.TryParse(LicenseTypeChoice, out int userChoice))
+            if (int.TryParse(LicenseTypeChoice, out int o_UserChoice))
             {
-                if ((userChoice >= LicenseType.getMinOption()) && (userChoice <= LicenseType.getMaxOption()))
+                if ((o_UserChoice >= LicenseType.getMinOption()) && (o_UserChoice <= LicenseType.getMaxOption()))
                 {
-                    resultUserChoice = (LicenseType.eLicenseType)userChoice;
+                    resultUserChoice = (LicenseType.eLicenseType)o_UserChoice;
                 }
                 else
                 {
@@ -304,14 +315,13 @@ namespace Ex03.ConsoleUI
         private int getEngineDisplacement()
         {
             String EngineDisplacementChoice = Console.ReadLine();
-            if (!int.TryParse(EngineDisplacementChoice, out int userChoice))
+            if (!int.TryParse(EngineDisplacementChoice, out int o_UserChoice))
             {
                 throw new FormatException("Must be an integer.\n");
             }
 
-            return userChoice;
+            return o_UserChoice;
         }
-
         private void updateDetailsForTruck(Truck i_Truck)
         {
             printTruckTransportingRefrigeratedMaterials();
@@ -325,7 +335,7 @@ namespace Ex03.ConsoleUI
             bool resChoice;
             if (transportingRefrigeratedMaterialsChoice.ToUpper() == "Y")
             {
-                resChoice =  true;
+                resChoice = true;
             }
             else if (transportingRefrigeratedMaterialsChoice.ToUpper() == "N")
             {
@@ -349,12 +359,142 @@ namespace Ex03.ConsoleUI
         private float getCargoVolume()
         {
             String cargoVolume = Console.ReadLine();
-            if (!float.TryParse(cargoVolume, out float userChoice))
+            if (!float.TryParse(cargoVolume, out float o_UserChoice))
             {
                 throw new FormatException("Must be a float.\n");
             }
 
-            return userChoice;
+            return o_UserChoice;
         }
+        private void updateEnergy(Vehicle i_Vehicle)
+        {
+            if (i_Vehicle.EnergyType is Gasoline)
+            {
+                Console.Write("Please enter your current fuel amount (liters): ");
+            }
+            else
+            {
+                Console.Write("Please enter your current battery amount (hours): ");
+            }
+            float currentEnergy = getCurrentEenergyAmount();
+            i_Vehicle.EnergyType.CurrentCapacity = currentEnergy;
+        }
+        private float getCurrentEenergyAmount()
+        {
+            String currentEnergy = Console.ReadLine();
+            if (!float.TryParse(currentEnergy, out float o_UserChoice))
+            {
+                throw new FormatException("Must be a float.\n");
+            }
+
+            return o_UserChoice;
+        }
+        private void getWheelsDetails(Vehicle i_Vehicle)
+        {
+            String wheelsManufacturerName;
+            float whellsCurrentAirPressure;
+            Console.Write("Please enter your wheel's manufacturer name: ");
+            wheelsManufacturerName = getManufacturerName();
+            Console.Write("Please enter your wheel's current air pressure: ");
+            whellsCurrentAirPressure = getCurrentAirPressure();
+            for (int i = 0; i < i_Vehicle.VehicleWheels.Count; i++)
+            {
+                i_Vehicle.VehicleWheels[i].CurrentAirPressure = whellsCurrentAirPressure;
+                i_Vehicle.VehicleWheels[i].ManufacturerName = wheelsManufacturerName;
+            }
+        }
+        private String getManufacturerName()
+        {
+            String wheelsManufacturerName = Console.ReadLine();
+            if (String.IsNullOrEmpty(wheelsManufacturerName))
+            {
+                throw new ArgumentException("Manufacturer name cannot be null or empty");
+            }
+
+            return wheelsManufacturerName;
+        }
+        private float getCurrentAirPressure()
+        {
+            String wheelsCurrentAiPressure = Console.ReadLine();
+            if (!float.TryParse(wheelsCurrentAiPressure, out float o_UserChoice))
+            {
+                throw new FormatException("Must be a float.\n");
+            }
+
+            return o_UserChoice;
+        }
+        private void showListOfLicenseNumbers()
+        {
+            printLicenseNumberFilterOptions();
+            int filterOption = getFilterOption();
+            List<String> licenseNumbersList;
+            if (filterOption == k_NoFilter)
+            {
+                licenseNumbersList = m_Garage.GetListOfAllLicensesNumbers();
+            }
+            else
+            {
+                licenseNumbersList = m_Garage.GetListOfFilteredLicensesNumbers((VehicleStatus.eVehicleStatus)filterOption);
+            }
+            printLicenseList(licenseNumbersList);
+        }
+        private void printLicenseNumberFilterOptions()
+        {
+            Console.WriteLine("Enter your filter option: ");
+            Console.WriteLine("0. No filter");
+            Console.WriteLine("1. In repair vehicles");
+            Console.WriteLine("2. Fixed vehicles");
+            Console.WriteLine("3. Paid vehicles");
+        }
+        private int getFilterOption()
+        {
+            String filterOption = Console.ReadLine();
+            int resultUserChoice;
+            if (int.TryParse(filterOption, out int o_UserChoice))
+            {
+                if ((o_UserChoice >= VehicleStatus.getMinOption()) && (o_UserChoice <= VehicleStatus.getMaxOption()))
+                {
+                    resultUserChoice = o_UserChoice;
+                }
+                else if (o_UserChoice == k_NoFilter)
+                {
+                    resultUserChoice = k_NoFilter;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(VehicleStatus.getMinOption(), VehicleStatus.getMaxOption());
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input\n");
+            }
+
+            return resultUserChoice;
+        }
+        private void printList<T>(List<T> i_List)
+        {
+            int serialNumber = 1;
+            foreach (T item in i_List)
+            {
+                Console.WriteLine($"{serialNumber++}: {item}");
+            }
+        }
+        private bool isEmptyList<T>(List<T> i_List)
+        {
+            return i_List.Count == 0;
+        }
+        private void printLicenseList(List<String> i_LicenseNumbersList)
+        {
+            if (isEmptyList(i_LicenseNumbersList))
+            {
+                Console.WriteLine("Sorry, there are no vehicles in the garage.");
+            }
+            else
+            {
+                // TODO: add print like "the licencse numbers are:"
+                printList(i_LicenseNumbersList);
+            }
     }
+}
 }

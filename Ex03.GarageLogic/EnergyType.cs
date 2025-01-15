@@ -12,7 +12,7 @@
         }
 
         public float MaxCapacity { get; set;}
-        public float CurrentCapacity { get; set; }
+        public float CurrentCapacity { get; set; } // TODO: check if not bigger ten max energy.
         public float EnergyPercentage { get; set; }
 
         public void SetEnergyPercentage()

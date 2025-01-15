@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         }
 
         public string ManufacturerName { get; set; }
-        public float CurrentAirPressure { get; set; }
+        public float CurrentAirPressure { get; set; } // TODO: check if not bigger ten max energy.
         public float MaxAirPressure { get; set; }
         
         public void Inflating(float i_AddAirToWheel) 

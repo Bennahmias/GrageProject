@@ -48,27 +48,25 @@ namespace Ex03.GarageLogic
         {
             m_VehicleFilesDict[i_LicenseNumber].Status = i_newStatusNumber;
         }
-
-        public List<string> GetListOfFilteredLicensesNumbers(int i_StatusNumber)
+        public List<string> GetListOfFilteredLicensesNumbers(VehicleStatus.eVehicleStatus i_StatusNumber)
         {
             List<string> resultList = new List<string>();
-            if (i_StatusNumber == 3) //TODO: in UI to implement that this number means no filter or think better way
+            foreach (KeyValuePair<string, VehicleFile> vehicleFile in m_VehicleFilesDict)
             {
-                foreach (string licenseNumberKey in m_VehicleFilesDict.Keys)
+                if (vehicleFile.Value.Status == i_StatusNumber)
                 {
-                    resultList.Add(licenseNumberKey);
+                    resultList.Add(vehicleFile.Key);
                 }
             }
-            else
+
+            return resultList;
+        }
+        public List<string> GetListOfAllLicensesNumbers()
+        {
+            List<string> resultList = new List<string>();
+            foreach (string licenseNumberKey in m_VehicleFilesDict.Keys)
             {
-                VehicleStatus.eVehicleStatus status = (VehicleStatus.eVehicleStatus)i_StatusNumber;
-                foreach (KeyValuePair<string, VehicleFile> vehicleFile in m_VehicleFilesDict)
-                {
-                    if (vehicleFile.Value.Status == status)
-                    {
-                        resultList.Add(vehicleFile.Key);
-                    }
-                }
+                resultList.Add(licenseNumberKey);
             }
 
             return resultList;
