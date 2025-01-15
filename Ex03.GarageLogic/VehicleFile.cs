@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Owner name cannot be null or empty");
+                    throw new ArgumentException("Owner name cannot be null or empty.");
                 }
                 m_OwnerName = value;
             }
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Phone number cannot be null or empty");
+                    throw new ArgumentException("Phone number cannot be null or empty.");
                 }
                 m_PhoneNumber = value;
             }

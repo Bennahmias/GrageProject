@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("License number cannot be null or empty");
+                    throw new ArgumentException("License number cannot be null or empty.");
                 }
                 m_LicenseNumber = value;
             }
@@ -42,7 +42,7 @@ namespace Ex03.GarageLogic
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("Model Name cannot be null or empty");
+                    throw new ArgumentException("Model Name cannot be null or empty.");
                 }
                 m_ModelName = value;
             }

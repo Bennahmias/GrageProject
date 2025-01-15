@@ -18,11 +18,11 @@ namespace Ex03.GarageLogic
         {
             VehicleFile vehicleFile = new VehicleFile(i_OwnerName, i_PhoneNumber);
             vehicleFile.Vehicle = GenerateVehicles.CreateNewVehicle(i_LicenseNumber, i_VehicleTypeNumber);
-            m_VehicleFilesDict.Add(i_LicenseNumber, vehicleFile);
+            VehicleFilesDict.Add(i_LicenseNumber, vehicleFile);
         }
         public bool VehicleInGarage(string i_LicenseNumber)
         {
-            return m_VehicleFilesDict.ContainsKey(i_LicenseNumber);
+            return VehicleFilesDict.ContainsKey(i_LicenseNumber);
         }
         public void SetEnergyOfVehicle()
         {
@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
         }
         public void SetNewStatus(string i_LicenseNumber, VehicleStatus.eVehicleStatus i_newStatusNumber)
         {
-            m_VehicleFilesDict[i_LicenseNumber].Status = i_newStatusNumber;
+            VehicleFilesDict[i_LicenseNumber].Status = i_newStatusNumber;
         }
         public List<string> GetListOfFilteredLicensesNumbers(VehicleStatus.eVehicleStatus i_StatusNumber)
         {

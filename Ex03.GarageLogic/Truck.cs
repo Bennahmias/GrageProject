@@ -23,6 +23,4 @@ namespace Ex03.GarageLogic
             set { m_CargoVolume = value; }
         }
     } 
-
-    }
 }

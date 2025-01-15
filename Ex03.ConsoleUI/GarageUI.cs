@@ -1,7 +1,6 @@
 ﻿using Ex03.GarageLogic;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace Ex03.ConsoleUI
 {
@@ -10,7 +9,7 @@ namespace Ex03.ConsoleUI
         private Garage m_Garage;
         private bool m_ExitFromSystem;
         private const int k_NoFilter = 0;
-
+        private const bool k_WithFilterOption = true;
         public GarageUI()
         {
             m_Garage = new Garage();
@@ -43,12 +42,13 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         applyMenuOption(userInput);
-                        printReturnToMenu();
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Console.WriteLine(ex.Message);
                         //TODO: what
                     }
+                    printReturnToMenu();
                     Console.Clear();
                 }
             }
@@ -58,14 +58,13 @@ namespace Ex03.ConsoleUI
             switch (i_UserInput)
             {
                 case MenuOptions.eMenuOptions.AddNewCar:
-                    // TODO: try and catch, if the vechile exist then change the status - make a new function for this task.
                     addNewVehicleToTheGarage();
                     break;
                 case MenuOptions.eMenuOptions.ShowListOfLicenseNumbers:
                     showListOfLicenseNumbers();
                     break;
                 case MenuOptions.eMenuOptions.ChangeVehicleStatus:
-                    //
+                    changeVehicleStatus();
                     break;
                 case MenuOptions.eMenuOptions.InflateWheelsToMax:
                     //
@@ -122,6 +121,7 @@ namespace Ex03.ConsoleUI
                 ownerPhoneNumber = Console.ReadLine();
                 m_Garage.AddVehicleToGarage(licenseNumber, vechileType, ownerName, ownerPhoneNumber);
                 updateDetails(m_Garage.VehicleFilesDict[licenseNumber].Vehicle, vechileType);
+                Console.WriteLine("Vehicle added successfully");
             }
         }
         private void printVechileTypeMenu()
@@ -160,7 +160,7 @@ namespace Ex03.ConsoleUI
             bool isInTheGarage = false;
             if (m_Garage.VehicleInGarage(i_LicenseNumber))
             {
-                Console.WriteLine("This vehicle is already exist in the garage.");
+                Console.WriteLine("This vehicle is already exist in the garage, and has been updated to in repair status.");
                 m_Garage.SetNewStatus(i_LicenseNumber, VehicleStatus.eVehicleStatus.InRepair);
                 isInTheGarage = true;
             }
@@ -193,7 +193,7 @@ namespace Ex03.ConsoleUI
             String modelName = Console.ReadLine();
             if (String.IsNullOrEmpty(modelName))
             {
-                throw new ArgumentException("Model name cannot be null or empty");
+                throw new ArgumentException("Model name cannot be null or empty.");
             }
             else
             {
@@ -407,7 +407,7 @@ namespace Ex03.ConsoleUI
             String wheelsManufacturerName = Console.ReadLine();
             if (String.IsNullOrEmpty(wheelsManufacturerName))
             {
-                throw new ArgumentException("Manufacturer name cannot be null or empty");
+                throw new ArgumentException("Manufacturer name cannot be null or empty.");
             }
 
             return wheelsManufacturerName;
@@ -425,7 +425,7 @@ namespace Ex03.ConsoleUI
         private void showListOfLicenseNumbers()
         {
             printLicenseNumberFilterOptions();
-            int filterOption = getFilterOption();
+            int filterOption = getStatusOption(k_WithFilterOption);
             List<String> licenseNumbersList;
             if (filterOption == k_NoFilter)
             {
@@ -435,7 +435,7 @@ namespace Ex03.ConsoleUI
             {
                 licenseNumbersList = m_Garage.GetListOfFilteredLicensesNumbers((VehicleStatus.eVehicleStatus)filterOption);
             }
-            printLicenseList(licenseNumbersList);
+            printLicenseList(licenseNumbersList, filterOption);
         }
         private void printLicenseNumberFilterOptions()
         {
@@ -445,7 +445,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("2. Fixed vehicles");
             Console.WriteLine("3. Paid vehicles");
         }
-        private int getFilterOption()
+        private int getStatusOption(bool i_WithFilterOption)
         {
             String filterOption = Console.ReadLine();
             int resultUserChoice;
@@ -455,7 +455,7 @@ namespace Ex03.ConsoleUI
                 {
                     resultUserChoice = o_UserChoice;
                 }
-                else if (o_UserChoice == k_NoFilter)
+                else if (i_WithFilterOption && o_UserChoice == k_NoFilter)
                 {
                     resultUserChoice = k_NoFilter;
                 }
@@ -483,22 +483,93 @@ namespace Ex03.ConsoleUI
         {
             return i_List.Count == 0;
         }
-        private void printLicenseList(List<String> i_LicenseNumbersList)
+        private void printLicenseList(List<String> i_LicenseNumbersList, int i_FilterStatus)
         {
             if (isEmptyList(i_LicenseNumbersList))
             {
-                Console.WriteLine("Sorry, there are no vehicles in the garage.");
+                if (i_FilterStatus == k_NoFilter)
+                {
+                    Console.WriteLine("Sorry, there are no vehicles in the garage.");
+                }
+                else
+                {
+                    Console.WriteLine($"Sorry, there are no '{(VehicleStatus.eVehicleStatus)i_FilterStatus}' vehicles in the garage.");
+                }
             }
             else
             {
-                Console.WriteLine("The license numbers are: "); 
+                Console.WriteLine("The list of license numbers is:");
                 printList(i_LicenseNumbersList);
             }
-    }
+        }
         private void printReturnToMenu()
         {
-            Console.Write("To return to the main menu, please press Enter.");
+            Console.Write("To return to the main menu, please press Enter... ");
             Console.ReadLine();
+        }
+        private void changeVehicleStatus()
+        {
+            Console.Write("Please enter license vehicle number: ");
+            String licenseNumber = getLicenseNumber();
+            if (!m_Garage.VehicleInGarage(licenseNumber))
+            {
+                printVehicleNotInGarage(licenseNumber);
+            }
+            else
+            {
+                updateVehicleStatus(licenseNumber);
+            }
+        }
+        private int getStatusOption()
+        {
+            String filterOption = Console.ReadLine();
+            int resultUserChoice;
+            if (int.TryParse(filterOption, out int o_UserChoice))
+            {
+                if ((o_UserChoice >= VehicleStatus.getMinOption()) && (o_UserChoice <= VehicleStatus.getMaxOption()))
+                {
+                    resultUserChoice = o_UserChoice;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(VehicleStatus.getMinOption(), VehicleStatus.getMaxOption());
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input\n");
+            }
+
+            return resultUserChoice;
+        }
+
+        private void printNewStatusOptions()
+        {
+            Console.WriteLine("Enter your new status option: ");
+            Console.WriteLine("1. In repair vehicles");
+            Console.WriteLine("2. Fixed vehicles");
+            Console.WriteLine("3. Paid vehicles");
+        }
+        private String getLicenseNumber()
+        {
+            String licenseNumber = Console.ReadLine();
+            if (String.IsNullOrEmpty(licenseNumber))
+            {
+                throw new ArgumentException("License number cannot be null or empty.");
+            }
+
+            return licenseNumber;
+        }
+        private void updateVehicleStatus(String i_LicenseNumber)
+        {
+            printNewStatusOptions();
+            VehicleStatus.eVehicleStatus statusOption = (VehicleStatus.eVehicleStatus)getStatusOption(!k_WithFilterOption);
+            m_Garage.SetNewStatus(i_LicenseNumber, statusOption);
+            Console.WriteLine($"The vehicle with license number: {i_LicenseNumber} has been successfully updated to status '{statusOption}'.");
+        }
+        private void printVehicleNotInGarage(String i_LicenseNumber)
+        {
+            Console.WriteLine($"The vehicle with license number: {i_LicenseNumber} is not in the garage");
         }
     }
 }
