@@ -71,8 +71,16 @@ namespace Ex03.GarageLogic
             return resultList;
         }
 
-        //TODO: תדלוק רכב דלק
-        //TODO:טעינת רכב חשמלי
-        
+
+        public void refuelVehicle(Vehicle i_Vehicle, float i_EnergyToAdd, GasType.eGasType i_GasTypeChoice)
+        {
+            ((Gasoline)i_Vehicle.EnergyType).Refueling(i_EnergyToAdd, i_GasTypeChoice);
+        }
+        public void refuelVehicle(Vehicle i_Vehicle, float i_EnergyToAdd)
+        {
+            ((Electric)i_Vehicle.EnergyType).BatteryCharging(i_EnergyToAdd);
+        }
+
+
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class Motorcycle : Vehicle
     {
@@ -14,13 +11,13 @@ namespace Ex03.GarageLogic
             : base(i_LicenseNumber, i_EnergyType, k_NumberOfWheels, k_MaxAirPressure) { }
         public LicenseType.eLicenseType LicenseType
         {
-            get { return m_LicenseType;}
-            set { m_LicenseType = value;}
+            get { return m_LicenseType; }
+            set { m_LicenseType = value; }
         }
         public int EngineDisplacement
         {
-            get { return m_EngineDisplacement;}
-            set { m_EngineDisplacement = value;}
+            get { return m_EngineDisplacement; }
+            set { m_EngineDisplacement = value; }
         }
     }
 }

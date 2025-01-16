@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 
 namespace Ex03.GarageLogic
@@ -20,7 +19,7 @@ namespace Ex03.GarageLogic
         }
         public string LicenseNumber
         {
-            get { return m_LicenseNumber;}
+            get { return m_LicenseNumber; }
             set
             {
                 if (String.IsNullOrEmpty(value))
@@ -32,8 +31,8 @@ namespace Ex03.GarageLogic
         }
         public EnergyType EnergyType
         {
-            get { return m_EnergyType;}
-            set { m_EnergyType = value;}
+            get { return m_EnergyType; }
+            set { m_EnergyType = value; }
         }
         public string ModelName
         {
@@ -49,8 +48,8 @@ namespace Ex03.GarageLogic
         }
         public List<Wheel> VehicleWheels
         {
-            get { return m_VehicleWheels;}
-            set { m_VehicleWheels = value;}
+            get { return m_VehicleWheels; }
+            set { m_VehicleWheels = value; }
         }
         private void AddWheelsToVehicle(int i_NumberOfWheels, float i_MaxAirPressure)
         {

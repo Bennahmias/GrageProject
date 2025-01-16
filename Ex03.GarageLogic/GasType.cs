@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -10,10 +6,19 @@ namespace Ex03.GarageLogic
     {
         public enum eGasType
         {
-            Soler,
-            Octan95,
-            Octan96,
-            Octan98
+            Soler = 1,
+            Octan95 = 2,
+            Octan96 = 3,
+            Octan98 = 4
+        }
+
+        public static int getMinOption()
+        {
+            return (int)Enum.GetValues(typeof(eGasType)).GetValue(0);
+        }
+        public static int getMaxOption()
+        {
+            return (int)Enum.GetValues(typeof(eGasType)).GetValue(Enum.GetValues(typeof(eGasType)).Length - 1);
         }
     }
 }

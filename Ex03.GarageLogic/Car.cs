@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     public class Car : Vehicle
     {
@@ -10,7 +7,7 @@ namespace Ex03.GarageLogic
         public const int k_NumberOfWheels = 5;
         private const float k_MaxAirPressure = 34.0f;
         public Car(string i_LicenseNumber, EnergyType i_EnergyType)
-            : base(i_LicenseNumber, i_EnergyType, k_NumberOfWheels, k_MaxAirPressure) {}
+            : base(i_LicenseNumber, i_EnergyType, k_NumberOfWheels, k_MaxAirPressure) { }
         public Color.eColor Color
         {
             get { return m_Color; }
@@ -18,8 +15,8 @@ namespace Ex03.GarageLogic
         }
         public DoorsNumber.eDoorsNumber DoorsNumber
         {
-            get { return m_DoorsNumber;}
-            set { m_DoorsNumber = value;}
+            get { return m_DoorsNumber; }
+            set { m_DoorsNumber = value; }
         }
 
 

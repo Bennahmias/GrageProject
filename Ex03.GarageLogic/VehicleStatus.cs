@@ -1,6 +1,4 @@
-﻿
-using static Ex03.GarageLogic.Color;
-using System;
+﻿using System;
 
 namespace Ex03.GarageLogic
 {

@@ -1,5 +1,4 @@
 ﻿using System;
-using static Ex03.GarageLogic.Color;
 
 namespace Ex03.GarageLogic
 {

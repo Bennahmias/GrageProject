@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
-    public class Wheel 
+    public class Wheel
     {
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;
@@ -14,12 +12,12 @@ namespace Ex03.GarageLogic
         }
         public string ManufacturerName
         {
-            get { return m_ManufacturerName;}
-            set { m_ManufacturerName = value;}
+            get { return m_ManufacturerName; }
+            set { m_ManufacturerName = value; }
         }
         public float CurrentAirPressure
         {
-            get {return m_CurrentAirPressure;}
+            get { return m_CurrentAirPressure; }
             set
             {
                 if (value <= MaxAirPressure)
@@ -34,10 +32,10 @@ namespace Ex03.GarageLogic
         }
         public float MaxAirPressure
         {
-            get { return r_MaxAirPressure;}
+            get { return r_MaxAirPressure; }
             //set { m_MaxAirPressure = value; } //TODO: i dont like it that its not readonly
         }
-        public void Inflating(float i_AddAirToWheel) 
+        public void Inflating(float i_AddAirToWheel)
         {
             if (CurrentAirPressure + i_AddAirToWheel <= MaxAirPressure)
             {
@@ -52,6 +50,6 @@ namespace Ex03.GarageLogic
         {
             CurrentAirPressure = i_MaxAirPressure;
         }
-        
+
     }
 }

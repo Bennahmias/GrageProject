@@ -10,14 +10,14 @@ namespace Ex03.GarageLogic
         private Vehicle m_Vehicle;
 
         public VehicleFile(string i_OwnerName, string i_PhoneNumber)
-        { 
-            OwnerName = i_OwnerName; 
-            PhoneNumber = i_PhoneNumber; 
+        {
+            OwnerName = i_OwnerName;
+            PhoneNumber = i_PhoneNumber;
             Status = VehicleStatus.eVehicleStatus.InRepair;
         }
         public string OwnerName
         {
-            get { return m_OwnerName;}
+            get { return m_OwnerName; }
             set
             {
                 if (String.IsNullOrEmpty(value))
@@ -41,13 +41,13 @@ namespace Ex03.GarageLogic
         }
         public Vehicle Vehicle
         {
-            get { return m_Vehicle;}
-            set { m_Vehicle = value;}
+            get { return m_Vehicle; }
+            set { m_Vehicle = value; }
         }
         public VehicleStatus.eVehicleStatus Status
         {
-            get { return m_Status;}
-            set { m_Status = value;}
+            get { return m_Status; }
+            set { m_Status = value; }
         }
         public void ChangeVehicleStatus(VehicleStatus.eVehicleStatus i_NewStatus)
         {

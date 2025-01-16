@@ -1,4 +1,7 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+using System.Collections.Generic;
+
+namespace Ex03.GarageLogic
 {
     public abstract class EnergyType
     {
@@ -12,18 +15,19 @@
         }
         public float MaxCapacity
         {
-            get {return m_MaxCapacity;}
-            set { m_MaxCapacity = value;} //TODO dont like that its not readonly and delete the set
+            get { return m_MaxCapacity; }
+            set { m_MaxCapacity = value; } //TODO dont like that its not readonly and delete the set
 
         }
         public float CurrentCapacity
         {
-            get {return m_CurrentCapacity ;}
+            get { return m_CurrentCapacity; }
             set
             {
                 if (value <= MaxCapacity)
                 {
                     m_CurrentCapacity = value;
+                    SetEnergyPercentage();
                 }
                 else
                 {
@@ -34,11 +38,11 @@
         public float EnergyPercentage
         {
             get { return m_EnergyPercentage; }
-            set { SetEnergyPercentage(); }
         }
         public void SetEnergyPercentage()
         {
             m_EnergyPercentage = (CurrentCapacity / MaxCapacity) * 100;
         }
+        public abstract Dictionary<String, String> ShowEnergyType();
     }
 }

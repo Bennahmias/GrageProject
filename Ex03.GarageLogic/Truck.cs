@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -14,7 +13,7 @@ namespace Ex03.GarageLogic
             : base(i_LicenseNumber, i_EnergyType, k_NumberOfWheels, k_MaxAirPressure) { }
         public bool TransportingRefrigeratedMaterials
         {
-            get { return m_TransportingRefrigeratedMaterials;}
+            get { return m_TransportingRefrigeratedMaterials; }
             set { m_TransportingRefrigeratedMaterials = value; }
         }
         public float CargoVolume
@@ -22,5 +21,5 @@ namespace Ex03.GarageLogic
             get { return m_CargoVolume; }
             set { m_CargoVolume = value; }
         }
-    } 
+    }
 }

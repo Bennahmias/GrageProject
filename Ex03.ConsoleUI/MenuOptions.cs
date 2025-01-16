@@ -8,11 +8,11 @@ namespace Ex03.ConsoleUI
         {
             AddNewCar = 1,
             ShowListOfLicenseNumbers = 2,
-            ChangeVehicleStatus = 3, 
-            InflateWheelsToMax = 4, 
-            RefuelGasolineVehicle = 5, 
-            ChargingElectricVehicle = 6, 
-            ShowAllVehicleDetails = 7, 
+            ChangeVehicleStatus = 3,
+            InflateWheelsToMax = 4,
+            RefuelGasolineVehicle = 5,
+            ChargingElectricVehicle = 6,
+            ShowAllVehicleDetails = 7,
             ExitTheSystem = 8
         }
 
