@@ -1,4 +1,7 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+using System;
+
+namespace Ex03.GarageLogic
 {
     public class Car : Vehicle
     {
@@ -18,7 +21,19 @@
             get { return m_DoorsNumber; }
             set { m_DoorsNumber = value; }
         }
+        public override Dictionary<String, String> ShowDetails()
+        {
+            Dictionary<String, String> carDetails =
+                new Dictionary<String, String>(6);
+            carDetails.Add("Color: ", Color.ToString());
+            carDetails.Add("Doors number: ", DoorsNumber.ToString());
+            carDetails.Add("There are ", k_NumberOfWheels.ToString() + " wheels.");
+            carDetails.Add("Manufacrurer name: ", VehicleWheels[0].ManufacturerName);
+            carDetails.Add("Current air pressure ", VehicleWheels[0].CurrentAirPressure.ToString());
+            carDetails.Add("Maximum air pressure: ", k_MaxAirPressure.ToString());
 
+            return carDetails;
+        }
 
 
     }

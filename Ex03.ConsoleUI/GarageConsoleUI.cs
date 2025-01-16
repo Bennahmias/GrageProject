@@ -21,7 +21,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("4. Inflate Wheels To Maximum");
             Console.WriteLine("5. Refuel a Gasoline Vehicle");
             Console.WriteLine("6. Charging an Electric Vehicle");
-            Console.WriteLine("7. Show All Vehicles Details");
+            Console.WriteLine("7. Show Vehicle Details");
             Console.WriteLine("8. Exit The System");
             Console.Write("Please select an option: ");
         }

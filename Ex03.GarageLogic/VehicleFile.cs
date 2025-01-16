@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -52,6 +53,16 @@ namespace Ex03.GarageLogic
         public void ChangeVehicleStatus(VehicleStatus.eVehicleStatus i_NewStatus)
         {
             Status = i_NewStatus;
+        }
+        public Dictionary<String, String> ShowVehicleFile()
+        {
+            Dictionary<String, String> vehicleFileDetails =
+                new Dictionary<String, String>(6);
+            vehicleFileDetails.Add("Owner name: ", OwnerName.ToString());
+            vehicleFileDetails.Add("Phone number: ", PhoneNumber.ToString());
+            vehicleFileDetails.Add("Status: ", Status.ToString());
+
+            return vehicleFileDetails;
         }
     }
 }

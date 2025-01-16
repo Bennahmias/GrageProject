@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -20,6 +21,19 @@ namespace Ex03.GarageLogic
         {
             get { return m_CargoVolume; }
             set { m_CargoVolume = value; }
+        }
+        public override Dictionary<String, String> ShowDetails()
+        {
+            Dictionary<String, String> TruckDetails =
+                new Dictionary<String, String>(6);
+            TruckDetails.Add("Is transporting refrigerated materials? ", TransportingRefrigeratedMaterials? "Yes." : "No.");
+            TruckDetails.Add("Cargo volume: ", CargoVolume.ToString());
+            TruckDetails.Add("There are ", k_NumberOfWheels.ToString() + " wheels.");
+            TruckDetails.Add("Manufacrurer name: ", VehicleWheels[0].ManufacturerName);
+            TruckDetails.Add("Current air pressure ", VehicleWheels[0].CurrentAirPressure.ToString());
+            TruckDetails.Add("Maximum air pressure: ", k_MaxAirPressure.ToString());
+
+            return TruckDetails;
         }
     }
 }

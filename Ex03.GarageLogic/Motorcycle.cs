@@ -1,4 +1,7 @@
-﻿namespace Ex03.GarageLogic
+﻿using System.Collections.Generic;
+using System;
+
+namespace Ex03.GarageLogic
 {
     public class Motorcycle : Vehicle
     {
@@ -18,6 +21,19 @@
         {
             get { return m_EngineDisplacement; }
             set { m_EngineDisplacement = value; }
+        }
+        public override Dictionary<String, String> ShowDetails()
+        {
+            Dictionary<String, String> motorcycleDetails =
+                new Dictionary<String, String>(6);
+            motorcycleDetails.Add("License type: ", LicenseType.ToString());
+            motorcycleDetails.Add("Engine displacement: ", EngineDisplacement.ToString());
+            motorcycleDetails.Add("There are ", k_NumberOfWheels.ToString() + " wheels.");
+            motorcycleDetails.Add("Manufacrurer name: ", VehicleWheels[0].ManufacturerName);
+            motorcycleDetails.Add("Current air pressure ", VehicleWheels[0].CurrentAirPressure.ToString());
+            motorcycleDetails.Add("Maximum air pressure: ", VehicleWheels[0].MaxAirPressure.ToString());
+
+            return motorcycleDetails;
         }
     }
 }

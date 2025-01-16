@@ -1,6 +1,5 @@
 ﻿using Ex03.GarageLogic;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Ex03.ConsoleUI
@@ -42,13 +41,6 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         applyMenuOption(userInput);
-                        foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict["1234"].Vehicle.EnergyType.ShowEnergyType())
-                        {
-                            Console.WriteLine($"{kvp.Key}{kvp.Value}");
-                        }
-
-                        int x = 8;
-                        x = 9;
 
                     }
                     catch (Exception ex)
@@ -84,7 +76,7 @@ namespace Ex03.ConsoleUI
                     chargingElectricVehicle();
                     break;
                 case MenuOptions.eMenuOptions.ShowAllVehicleDetails:
-                    //showAllVehicleDetails();
+                    showVehicleDetails();
                     break;
                 case MenuOptions.eMenuOptions.ExitTheSystem:
                     m_ExitFromSystem = true;
@@ -683,6 +675,51 @@ namespace Ex03.ConsoleUI
             }
 
             return isElectricVehicle;
+        }
+        private void showVehicleDetails()
+        {
+            String licenseNumber = getLicenseNumber();
+            if (isVehicleInGarageOrNotify(licenseNumber))
+            {
+                m_Garage.VehicleFilesDict[licenseNumber].ShowVehicleFile();
+                displayVehicleData(licenseNumber);
+            }
+        }
+        private void displayVehicleData(String i_LicenseNumber)
+        {
+            Console.WriteLine("============================================");
+            displayVechileFileDetails(i_LicenseNumber);
+            displayVechileDetails(i_LicenseNumber);
+            displayVechileTypeDetails(i_LicenseNumber);
+            displayVechileEnergyType(i_LicenseNumber);
+        }
+        private void displayVechileDetails(String i_LicenseNumber)
+        {
+            foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict[i_LicenseNumber].Vehicle.ShowVehicle())
+            {
+                Console.WriteLine($"{kvp.Key}{kvp.Value}");
+            }
+        }
+        private void displayVechileTypeDetails(String i_LicenseNumber)
+        {
+            foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict[i_LicenseNumber].Vehicle.ShowDetails())
+            {
+                Console.WriteLine($"{kvp.Key}{kvp.Value}");
+            }
+        }
+        private void displayVechileEnergyType(String i_LicenseNumber)
+        {
+            foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict[i_LicenseNumber].Vehicle.EnergyType.ShowEnergyType())
+            {
+                Console.WriteLine($"{kvp.Key}{kvp.Value}");
+            }
+        }
+        private void displayVechileFileDetails(String i_LicenseNumber)
+        {
+            foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict[i_LicenseNumber].ShowVehicleFile())
+            {
+                Console.WriteLine($"{kvp.Key}{kvp.Value}");
+            }
         }
     }
 }
