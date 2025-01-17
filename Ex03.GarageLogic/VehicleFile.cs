@@ -50,10 +50,6 @@ namespace Ex03.GarageLogic
             get { return m_Status; }
             set { m_Status = value; }
         }
-        public void ChangeVehicleStatus(VehicleStatus.eVehicleStatus i_NewStatus)
-        {
-            Status = i_NewStatus;
-        }
         public Dictionary<String, String> ShowVehicleFile()
         {
             Dictionary<String, String> vehicleFileDetails =

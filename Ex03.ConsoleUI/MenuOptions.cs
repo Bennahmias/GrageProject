@@ -12,17 +12,18 @@ namespace Ex03.ConsoleUI
             InflateWheelsToMax = 4,
             RefuelGasolineVehicle = 5,
             ChargingElectricVehicle = 6,
-            ShowAllVehicleDetails = 7,
-            ExitTheSystem = 8
+            ShowVehicleDetails = 7,
+            ExitTheSystem = 8,
+            InitializeInput = 9
         }
 
-        public static int getMinOption()
+        public static int GetMinOption()
         {
             return (int)Enum.GetValues(typeof(eMenuOptions)).GetValue(0);
         }
-        public static int getMaxOption()
+        public static int GetMaxOption()
         {
-            return (int)Enum.GetValues(typeof(eMenuOptions)).GetValue(Enum.GetValues(typeof(eMenuOptions)).Length - 1);
+            return (int)Enum.GetValues(typeof(eMenuOptions)).GetValue(Enum.GetValues(typeof(eMenuOptions)).Length - 1) - 1;
         }
     }
 }

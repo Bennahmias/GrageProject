@@ -12,11 +12,11 @@ namespace Ex03.GarageLogic
             Octan98 = 4
         }
 
-        public static int getMinOption()
+        public static int GetMinOption()
         {
             return (int)Enum.GetValues(typeof(eGasType)).GetValue(0);
         }
-        public static int getMaxOption()
+        public static int GetMaxOption()
         {
             return (int)Enum.GetValues(typeof(eGasType)).GetValue(Enum.GetValues(typeof(eGasType)).Length - 1);
         }

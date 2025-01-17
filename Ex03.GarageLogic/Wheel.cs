@@ -33,7 +33,6 @@
         public float MaxAirPressure
         {
             get { return r_MaxAirPressure; }
-            //set { m_MaxAirPressure = value; } //TODO: i dont like it that its not readonly
         }
         public void Inflating(float i_AddAirToWheel)
         {
@@ -48,8 +47,7 @@
         }
         public void InflatingToMax(float i_MaxAirPressure)
         {
-            CurrentAirPressure = i_MaxAirPressure;
+            CurrentAirPressure = MaxAirPressure;
         }
-
     }
 }

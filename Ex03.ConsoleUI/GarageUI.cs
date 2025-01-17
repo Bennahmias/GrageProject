@@ -10,6 +10,7 @@ namespace Ex03.ConsoleUI
         private bool m_ExitFromSystem;
         private const int k_NoFilter = 0;
         private const bool k_WithFilterOption = true;
+
         public GarageUI()
         {
             m_Garage = new Garage();
@@ -18,40 +19,62 @@ namespace Ex03.ConsoleUI
         public void RunGarage()
         {
             bool isValidInput = false;
-            GarageConsoleUI.PrintWelcome();
-
+            printWelcome();
             while (!m_ExitFromSystem)
             {
-                GarageConsoleUI.PrintMenu();
-                MenuOptions.eMenuOptions userInput = MenuOptions.eMenuOptions.AddNewCar;
-                try
-                {
-                    userInput = getUserInput();
-                    isValidInput = true;
-                }
-                catch (Exception ex) when (ex is ArgumentException || ex is ValueOutOfRangeException)
-                {
-                    Console.Clear();
-                    Console.WriteLine(ex.Message);
-                    isValidInput = false;
-                }
-
+                printMenu();
+                MenuOptions.eMenuOptions io_UserInput = MenuOptions.eMenuOptions.InitializeInput;
+                isValidInput = tryGetUserInput(ref io_UserInput);
                 if (isValidInput)
                 {
                     try
                     {
-                        applyMenuOption(userInput);
-
+                        applyMenuOption(io_UserInput);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        //TODO: what
                     }
-                    printReturnToMenu();
+                    printReturnToMenu(m_ExitFromSystem);
                     Console.Clear();
                 }
             }
+        }
+        private bool tryGetUserInput(ref MenuOptions.eMenuOptions io_UserInput)
+        {
+            bool isValidInput;
+            try
+            {
+                io_UserInput = getUserInput();
+                isValidInput = true;
+            }
+            catch (Exception ex) when (ex is ArgumentException || ex is ValueOutOfRangeException)
+            {
+                Console.Clear();
+                Console.WriteLine(ex.Message);
+                isValidInput = false;
+            }
+
+            return isValidInput;
+        }
+        private static void printWelcome()
+        {
+            Console.WriteLine("Welcome to the Garage System!\nPress Enter to see the menu");
+            Console.ReadLine();
+            Console.Clear();
+        }
+        private static void printMenu()
+        {
+            Console.WriteLine("==== Garage Menu ====");
+            Console.WriteLine("1. Add a New Vehicle");
+            Console.WriteLine("2. Show License Numbers Of Vehicles In The Garage");
+            Console.WriteLine("3. Change Vehicle Status");
+            Console.WriteLine("4. Inflate Wheels To Maximum");
+            Console.WriteLine("5. Refuel a Gasoline Vehicle");
+            Console.WriteLine("6. Charging an Electric Vehicle");
+            Console.WriteLine("7. Show Vehicle Details");
+            Console.WriteLine("8. Exit The System");
+            Console.Write("Please select an option: ");
         }
         private void applyMenuOption(MenuOptions.eMenuOptions i_UserInput)
         {
@@ -75,7 +98,7 @@ namespace Ex03.ConsoleUI
                 case MenuOptions.eMenuOptions.ChargingElectricVehicle:
                     chargingElectricVehicle();
                     break;
-                case MenuOptions.eMenuOptions.ShowAllVehicleDetails:
+                case MenuOptions.eMenuOptions.ShowVehicleDetails:
                     showVehicleDetails();
                     break;
                 case MenuOptions.eMenuOptions.ExitTheSystem:
@@ -89,13 +112,13 @@ namespace Ex03.ConsoleUI
             MenuOptions.eMenuOptions resultUserChoice;
             if (int.TryParse(userInput, out int o_UserChoice))
             {
-                if ((o_UserChoice >= MenuOptions.getMinOption()) && (o_UserChoice <= MenuOptions.getMaxOption()))
+                if ((o_UserChoice >= MenuOptions.GetMinOption()) && (o_UserChoice <= MenuOptions.GetMaxOption()))
                 {
                     resultUserChoice = (MenuOptions.eMenuOptions)o_UserChoice;
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(MenuOptions.getMinOption(), MenuOptions.getMaxOption());
+                    throw new ValueOutOfRangeException(MenuOptions.GetMinOption(), MenuOptions.GetMaxOption());
                 }
             }
             else
@@ -114,13 +137,21 @@ namespace Ex03.ConsoleUI
             if (!vehicleIsInTheGrage(licenseNumber))
             {
                 printVechileTypeMenu();
-                vechileType = getVechileType(); // The exception will go up, greate!
+                vechileType = getVechileType();
                 Console.Write("Please enter owner name: ");
                 ownerName = Console.ReadLine();
                 Console.Write("Please enter owner's phone number: ");
                 ownerPhoneNumber = Console.ReadLine();
                 m_Garage.AddVehicleToGarage(licenseNumber, vechileType, ownerName, ownerPhoneNumber);
-                updateDetails(m_Garage.VehicleFilesDict[licenseNumber].Vehicle, vechileType);
+                try
+                {
+                    updateDetails(m_Garage.VehicleFilesDict[licenseNumber].Vehicle, vechileType);
+                }
+                catch (Exception ex)
+                {
+                    m_Garage.VehicleFilesDict.Remove(licenseNumber);
+                    throw ex;
+                }
                 Console.WriteLine("Vehicle added successfully.");
             }
         }
@@ -139,13 +170,13 @@ namespace Ex03.ConsoleUI
             VehicleType.eVehicleType resultUserChoice;
             if (int.TryParse(vechileTypeChoice, out int o_UserChoice))
             {
-                if ((o_UserChoice >= VehicleType.getMinOption()) && (o_UserChoice <= VehicleType.getMaxOption()))
+                if ((o_UserChoice >= VehicleType.GetMinOption()) && (o_UserChoice <= VehicleType.GetMaxOption()))
                 {
                     resultUserChoice = (VehicleType.eVehicleType)o_UserChoice;
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(VehicleType.getMinOption(), VehicleType.getMaxOption());
+                    throw new ValueOutOfRangeException(VehicleType.GetMinOption(), VehicleType.GetMaxOption());
                 }
             }
             else
@@ -223,13 +254,13 @@ namespace Ex03.ConsoleUI
             Color.eColor resultUserChoice;
             if (int.TryParse(carTypeChoice, out int o_UserChoice))
             {
-                if ((o_UserChoice >= Color.getMinOption()) && (o_UserChoice <= Color.getMaxOption()))
+                if ((o_UserChoice >= Color.GetMinOption()) && (o_UserChoice <= Color.GetMaxOption()))
                 {
                     resultUserChoice = (Color.eColor)o_UserChoice;
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(Color.getMinOption(), Color.getMaxOption());
+                    throw new ValueOutOfRangeException(Color.GetMinOption(), Color.GetMaxOption());
                 }
             }
             else
@@ -253,13 +284,13 @@ namespace Ex03.ConsoleUI
             DoorsNumber.eDoorsNumber resultUserChoice;
             if (int.TryParse(carDoorChoice, out int o_UserChoice))
             {
-                if ((o_UserChoice >= DoorsNumber.getMinOption()) && (o_UserChoice <= DoorsNumber.getMaxOption()))
+                if ((o_UserChoice >= DoorsNumber.GetMinOption()) && (o_UserChoice <= DoorsNumber.GetMaxOption()))
                 {
                     resultUserChoice = (DoorsNumber.eDoorsNumber)o_UserChoice;
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(DoorsNumber.getMinOption(), DoorsNumber.getMaxOption());
+                    throw new ValueOutOfRangeException(DoorsNumber.GetMinOption(), DoorsNumber.GetMaxOption());
                 }
             }
             else
@@ -291,13 +322,13 @@ namespace Ex03.ConsoleUI
             LicenseType.eLicenseType resultUserChoice;
             if (int.TryParse(licenseTypeChoice, out int o_UserChoice))
             {
-                if ((o_UserChoice >= LicenseType.getMinOption()) && (o_UserChoice <= LicenseType.getMaxOption()))
+                if ((o_UserChoice >= LicenseType.GetMinOption()) && (o_UserChoice <= LicenseType.GetMaxOption()))
                 {
                     resultUserChoice = (LicenseType.eLicenseType)o_UserChoice;
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(LicenseType.getMinOption(), LicenseType.getMaxOption());
+                    throw new ValueOutOfRangeException(LicenseType.GetMinOption(), LicenseType.GetMaxOption());
                 }
             }
             else
@@ -391,16 +422,12 @@ namespace Ex03.ConsoleUI
         private void getWheelsDetails(Vehicle i_Vehicle)
         {
             String wheelsManufacturerName;
-            float whellsCurrentAirPressure;
+            float wheelsCurrentAirPressure;
             Console.Write("Please enter your wheel's manufacturer name: ");
             wheelsManufacturerName = getManufacturerName();
             Console.Write("Please enter your wheel's current air pressure: ");
-            whellsCurrentAirPressure = getCurrentAirPressure();
-            for (int i = 0; i < i_Vehicle.VehicleWheels.Count; i++)
-            {
-                i_Vehicle.VehicleWheels[i].CurrentAirPressure = whellsCurrentAirPressure;
-                i_Vehicle.VehicleWheels[i].ManufacturerName = wheelsManufacturerName;
-            }
+            wheelsCurrentAirPressure = getCurrentAirPressure();
+            m_Garage.SetWheelsDetails(i_Vehicle.LicenseNumber, wheelsManufacturerName, wheelsCurrentAirPressure);
         }
         private String getManufacturerName()
         {
@@ -451,7 +478,7 @@ namespace Ex03.ConsoleUI
             int resultUserChoice;
             if (int.TryParse(filterOption, out int o_UserChoice))
             {
-                if ((o_UserChoice >= VehicleStatus.getMinOption()) && (o_UserChoice <= VehicleStatus.getMaxOption()))
+                if ((o_UserChoice >= VehicleStatus.GetMinOption()) && (o_UserChoice <= VehicleStatus.GetMaxOption()))
                 {
                     resultUserChoice = o_UserChoice;
                 }
@@ -461,7 +488,7 @@ namespace Ex03.ConsoleUI
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(VehicleStatus.getMinOption(), VehicleStatus.getMaxOption());
+                    throw new ValueOutOfRangeException(VehicleStatus.GetMinOption(), VehicleStatus.GetMaxOption());
                 }
             }
             else
@@ -502,9 +529,17 @@ namespace Ex03.ConsoleUI
                 printList(i_LicenseNumbersList);
             }
         }
-        private void printReturnToMenu()
+        private void printReturnToMenu(bool i_ExitFromSystem)
         {
-            Console.Write("To return to the main menu, please press Enter... ");
+            if (!i_ExitFromSystem)
+            {
+                Console.Write("To return to the main menu, please press Enter... ");
+            }
+            else
+            {
+                Console.Write("Thank you and goodbye...");
+            }
+
             Console.ReadLine();
         }
         private void changeVehicleStatus()
@@ -518,28 +553,6 @@ namespace Ex03.ConsoleUI
             {
                 updateVehicleStatus(licenseNumber);
             }
-        }
-        private int getStatusOption()
-        {
-            String filterOption = Console.ReadLine();
-            int resultUserChoice;
-            if (int.TryParse(filterOption, out int o_UserChoice))
-            {
-                if ((o_UserChoice >= VehicleStatus.getMinOption()) && (o_UserChoice <= VehicleStatus.getMaxOption()))
-                {
-                    resultUserChoice = o_UserChoice;
-                }
-                else
-                {
-                    throw new ValueOutOfRangeException(VehicleStatus.getMinOption(), VehicleStatus.getMaxOption());
-                }
-            }
-            else
-            {
-                throw new ArgumentException("Invalid input\n");
-            }
-
-            return resultUserChoice;
         }
         private void printNewStatusOptions()
         {
@@ -609,13 +622,13 @@ namespace Ex03.ConsoleUI
             GasType.eGasType resultUserChoice;
             if (int.TryParse(gasTypeChoice, out int o_UserChoice))
             {
-                if ((o_UserChoice >= GasType.getMinOption()) && (o_UserChoice <= GasType.getMaxOption()))
+                if ((o_UserChoice >= GasType.GetMinOption()) && (o_UserChoice <= GasType.GetMaxOption()))
                 {
                     resultUserChoice = (GasType.eGasType)o_UserChoice;
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(GasType.getMinOption(), GasType.getMaxOption());
+                    throw new ValueOutOfRangeException(GasType.GetMinOption(), GasType.GetMaxOption());
                 }
             }
             else
@@ -681,7 +694,6 @@ namespace Ex03.ConsoleUI
             String licenseNumber = getLicenseNumber();
             if (isVehicleInGarageOrNotify(licenseNumber))
             {
-                m_Garage.VehicleFilesDict[licenseNumber].ShowVehicleFile();
                 displayVehicleData(licenseNumber);
             }
         }
@@ -689,8 +701,8 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("============================================");
             displayVechileFileDetails(i_LicenseNumber);
-            displayVechileDetails(i_LicenseNumber);
             displayVechileTypeDetails(i_LicenseNumber);
+            displayVechileDetails(i_LicenseNumber);
             displayVechileEnergyType(i_LicenseNumber);
         }
         private void displayVechileDetails(String i_LicenseNumber)
@@ -723,5 +735,3 @@ namespace Ex03.ConsoleUI
         }
     }
 }
-
-// TODO: class diagram install.

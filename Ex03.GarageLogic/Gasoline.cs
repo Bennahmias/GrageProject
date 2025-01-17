@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Ex03.GarageLogic
 {
@@ -12,13 +11,11 @@ namespace Ex03.GarageLogic
         {
             GasType = i_GasType;
         }
-
         public GasType.eGasType GasType
         {
             get { return m_GasType; }
             set { m_GasType = value; }
         }
-
         public void Refueling(float i_gasolineToAdd, GasType.eGasType i_GasType)
         {
             if (i_GasType != GasType)

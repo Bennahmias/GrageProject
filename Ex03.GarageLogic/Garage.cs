@@ -24,16 +24,12 @@ namespace Ex03.GarageLogic
         {
             return VehicleFilesDict.ContainsKey(i_LicenseNumber);
         }
-        public void SetEnergyOfVehicle()
-        {
-            //TODO:fill, problem with polymorphism
-        }
         public void SetWheelsDetails(string i_LicenseNumber, string i_ManufacturerName, float i_CurrentAirPressure)
         {
             foreach (Wheel wheel in m_VehicleFilesDict[i_LicenseNumber].Vehicle.VehicleWheels)
             {
                 wheel.ManufacturerName = i_ManufacturerName;
-                wheel.Inflating(i_CurrentAirPressure);
+                wheel.CurrentAirPressure = i_CurrentAirPressure;
             }
         }
         public void SetWheelsPressureToMax(string i_LicenseNumber)
@@ -70,8 +66,6 @@ namespace Ex03.GarageLogic
 
             return resultList;
         }
-
-
         public void refuelVehicle(Vehicle i_Vehicle, float i_EnergyToAdd, GasType.eGasType i_GasTypeChoice)
         {
             ((Gasoline)i_Vehicle.EnergyType).Refueling(i_EnergyToAdd, i_GasTypeChoice);
@@ -80,7 +74,5 @@ namespace Ex03.GarageLogic
         {
             ((Electric)i_Vehicle.EnergyType).BatteryCharging(i_EnergyToAdd);
         }
-
-
     }
 }

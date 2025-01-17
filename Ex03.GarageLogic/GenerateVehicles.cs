@@ -7,9 +7,6 @@ namespace Ex03.GarageLogic
     {
         public static Vehicle CreateNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType)
         {
-            //TODO: exception if not in range
-
-            EnergyType energyType = CreateEnergyType(i_VehicleType);
             Vehicle vehicle = BuildNewVehicle(i_LicenseNumber, i_VehicleType);
 
             return vehicle;
@@ -17,7 +14,6 @@ namespace Ex03.GarageLogic
         public static EnergyType CreateEnergyType(VehicleType.eVehicleType i_VehicleType)
         {
             EnergyType energyType;
-
             switch (i_VehicleType)
             {
                 case VehicleType.eVehicleType.GasolineCar:
@@ -36,7 +32,7 @@ namespace Ex03.GarageLogic
                     energyType = new Electric(2.9f);
                     break;
                 default:
-                    throw new ArgumentException(); //TODO: add args to this exception
+                    throw new ArgumentException("Wrong vehicle type."); 
             }
 
             return energyType;
@@ -44,7 +40,6 @@ namespace Ex03.GarageLogic
         public static Vehicle BuildNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType)
         {
             Vehicle newVehicle;
-
             switch (i_VehicleType)
             {
                 case VehicleType.eVehicleType.GasolineCar:
@@ -53,13 +48,13 @@ namespace Ex03.GarageLogic
                     break;
                 case VehicleType.eVehicleType.GasolineMotorcycle:
                 case VehicleType.eVehicleType.ElectricMotorcycle:
-                    newVehicle = new Motorcycle(i_LicenseNumber, CreateEnergyType(i_VehicleType)); // TODO :: Check that we throw exeptions.
+                    newVehicle = new Motorcycle(i_LicenseNumber, CreateEnergyType(i_VehicleType)); 
                     break;
                 case VehicleType.eVehicleType.GasolineTruck:
-                    newVehicle = new Truck(i_LicenseNumber, CreateEnergyType(i_VehicleType));  // TODO :: Check that we throw exeptions.
+                    newVehicle = new Truck(i_LicenseNumber, CreateEnergyType(i_VehicleType)); 
                     break;
                 default:
-                    throw new ArgumentException(); //TODO: add args to this exception
+                    throw new ArgumentException("Wrong vehicle type.");
             }
 
             return newVehicle;

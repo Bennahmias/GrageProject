@@ -5,19 +5,17 @@ namespace Ex03.GarageLogic
 {
     public abstract class EnergyType
     {
-        protected float m_MaxCapacity;
+        protected readonly float r_MaxCapacity;
         protected float m_CurrentCapacity = 0.0f;
         protected float m_EnergyPercentage;
 
         public EnergyType(float i_MaxCapacity)
         {
-            MaxCapacity = i_MaxCapacity;
+            r_MaxCapacity = i_MaxCapacity;
         }
         public float MaxCapacity
         {
-            get { return m_MaxCapacity; }
-            set { m_MaxCapacity = value; } //TODO dont like that its not readonly and delete the set
-
+            get { return r_MaxCapacity; }
         }
         public float CurrentCapacity
         {

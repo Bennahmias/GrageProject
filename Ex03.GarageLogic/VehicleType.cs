@@ -14,11 +14,11 @@ namespace Ex03.GarageLogic
             GasolineTruck = 5
         }
 
-        public static int getMinOption()
+        public static int GetMinOption()
         {
             return (int)Enum.GetValues(typeof(eVehicleType)).GetValue(0);
         }
-        public static int getMaxOption()
+        public static int GetMaxOption()
         {
             return (int)Enum.GetValues(typeof(eVehicleType)).GetValue(Enum.GetValues(typeof(eVehicleType)).Length - 1);
         }

@@ -12,11 +12,11 @@ namespace Ex03.GarageLogic
             B2 = 4
         }
 
-        public static int getMinOption()
+        public static int GetMinOption()
         {
             return (int)Enum.GetValues(typeof(eLicenseType)).GetValue(0);
         }
-        public static int getMaxOption()
+        public static int GetMaxOption()
         {
             return (int)Enum.GetValues(typeof(eLicenseType)).GetValue(Enum.GetValues(typeof(eLicenseType)).Length - 1);
         }

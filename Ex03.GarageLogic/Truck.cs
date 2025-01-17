@@ -25,13 +25,9 @@ namespace Ex03.GarageLogic
         public override Dictionary<String, String> ShowDetails()
         {
             Dictionary<String, String> TruckDetails =
-                new Dictionary<String, String>(6);
-            TruckDetails.Add("Is transporting refrigerated materials? ", TransportingRefrigeratedMaterials? "Yes." : "No.");
+                new Dictionary<String, String>(2);
+            TruckDetails.Add("Is transporting refrigerated materials? ", TransportingRefrigeratedMaterials ? "Yes." : "No.");
             TruckDetails.Add("Cargo volume: ", CargoVolume.ToString());
-            TruckDetails.Add("There are ", k_NumberOfWheels.ToString() + " wheels.");
-            TruckDetails.Add("Manufacrurer name: ", VehicleWheels[0].ManufacturerName);
-            TruckDetails.Add("Current air pressure ", VehicleWheels[0].CurrentAirPressure.ToString());
-            TruckDetails.Add("Maximum air pressure: ", k_MaxAirPressure.ToString());
 
             return TruckDetails;
         }

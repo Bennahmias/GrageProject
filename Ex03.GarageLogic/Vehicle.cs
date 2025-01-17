@@ -65,6 +65,10 @@ namespace Ex03.GarageLogic
                 new Dictionary<String, String>(6);
             vehicleDetails.Add("Model name: ", ModelName);
             vehicleDetails.Add("License number: ", LicenseNumber);
+            vehicleDetails.Add("There are ", VehicleWheels.Count.ToString() + " wheels.");
+            vehicleDetails.Add("Manufacrurer name: ", VehicleWheels[0].ManufacturerName);
+            vehicleDetails.Add("Current air pressure ", VehicleWheels[0].CurrentAirPressure.ToString());
+            vehicleDetails.Add("Maximum air pressure: ", VehicleWheels[0].MaxAirPressure.ToString());
 
             return vehicleDetails;
         }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -9,6 +9,7 @@ namespace Ex03.GarageLogic
         private DoorsNumber.eDoorsNumber m_DoorsNumber;
         public const int k_NumberOfWheels = 5;
         private const float k_MaxAirPressure = 34.0f;
+
         public Car(string i_LicenseNumber, EnergyType i_EnergyType)
             : base(i_LicenseNumber, i_EnergyType, k_NumberOfWheels, k_MaxAirPressure) { }
         public Color.eColor Color
@@ -24,17 +25,11 @@ namespace Ex03.GarageLogic
         public override Dictionary<String, String> ShowDetails()
         {
             Dictionary<String, String> carDetails =
-                new Dictionary<String, String>(6);
+                new Dictionary<String, String>(2);
             carDetails.Add("Color: ", Color.ToString());
             carDetails.Add("Doors number: ", DoorsNumber.ToString());
-            carDetails.Add("There are ", k_NumberOfWheels.ToString() + " wheels.");
-            carDetails.Add("Manufacrurer name: ", VehicleWheels[0].ManufacturerName);
-            carDetails.Add("Current air pressure ", VehicleWheels[0].CurrentAirPressure.ToString());
-            carDetails.Add("Maximum air pressure: ", k_MaxAirPressure.ToString());
 
             return carDetails;
         }
-
-
     }
 }

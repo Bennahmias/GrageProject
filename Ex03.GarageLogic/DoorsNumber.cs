@@ -12,11 +12,11 @@ namespace Ex03.GarageLogic
             Five = 4
         }
 
-        public static int getMinOption()
+        public static int GetMinOption()
         {
             return (int)Enum.GetValues(typeof(eDoorsNumber)).GetValue(0);
         }
-        public static int getMaxOption()
+        public static int GetMaxOption()
         {
             return (int)Enum.GetValues(typeof(eDoorsNumber)).GetValue(Enum.GetValues(typeof(eDoorsNumber)).Length - 1);
         }
