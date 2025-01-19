@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic
         {
             return (int)Enum.GetValues(typeof(eLicenseType)).GetValue(0);
         }
+
         public static int GetMaxOption()
         {
             return (int)Enum.GetValues(typeof(eLicenseType)).GetValue(Enum.GetValues(typeof(eLicenseType)).Length - 1);

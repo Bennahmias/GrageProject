@@ -11,11 +11,13 @@ namespace Ex03.GarageLogic
         {
             GasType = i_GasType;
         }
+
         public GasType.eGasType GasType
         {
             get { return m_GasType; }
             set { m_GasType = value; }
         }
+
         public void Refueling(float i_gasolineToAdd, GasType.eGasType i_GasType)
         {
             if (i_GasType != GasType)
@@ -32,10 +34,12 @@ namespace Ex03.GarageLogic
                 SetEnergyPercentage();
             }
         }
+
         public override Dictionary<String, String> ShowEnergyType()
         {
             Dictionary<String, String> energyTypeDetails =
                 new Dictionary<String, String>(4);
+
             energyTypeDetails.Add("Current fuel amount: ", CurrentCapacity.ToString());
             energyTypeDetails.Add("Maximum fuel amount: ", MaxCapacity.ToString());
             energyTypeDetails.Add("Percentage of fuel remaining: ", EnergyPercentage.ToString() + "%");
@@ -43,6 +47,7 @@ namespace Ex03.GarageLogic
 
             return energyTypeDetails;
         }
+
     }
 }
 

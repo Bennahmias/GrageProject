@@ -21,6 +21,7 @@ namespace Ex03.ConsoleUI
         {
             return (int)Enum.GetValues(typeof(eMenuOptions)).GetValue(0);
         }
+
         public static int GetMaxOption()
         {
             return (int)Enum.GetValues(typeof(eMenuOptions)).GetValue(Enum.GetValues(typeof(eMenuOptions)).Length - 1) - 1;

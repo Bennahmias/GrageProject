@@ -10,11 +10,13 @@
         {
             r_MaxAirPressure = i_MaxAirPressure;
         }
+
         public string ManufacturerName
         {
             get { return m_ManufacturerName; }
             set { m_ManufacturerName = value; }
         }
+
         public float CurrentAirPressure
         {
             get { return m_CurrentAirPressure; }
@@ -30,10 +32,12 @@
                 }
             }
         }
+
         public float MaxAirPressure
         {
             get { return r_MaxAirPressure; }
         }
+
         public void Inflating(float i_AddAirToWheel)
         {
             if (CurrentAirPressure + i_AddAirToWheel <= MaxAirPressure)
@@ -45,6 +49,7 @@
                 throw new ValueOutOfRangeException(0.0f, MaxAirPressure);
             }
         }
+
         public void InflatingToMax(float i_MaxAirPressure)
         {
             CurrentAirPressure = MaxAirPressure;

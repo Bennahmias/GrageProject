@@ -16,14 +16,17 @@ namespace Ex03.ConsoleUI
             m_Garage = new Garage();
             m_ExitFromSystem = false;
         }
+
         public void RunGarage()
         {
             bool isValidInput = false;
+
             printWelcome();
             while (!m_ExitFromSystem)
             {
                 printMenu();
                 MenuOptions.eMenuOptions io_UserInput = MenuOptions.eMenuOptions.InitializeInput;
+
                 isValidInput = tryGetUserInput(ref io_UserInput);
                 if (isValidInput)
                 {
@@ -40,9 +43,11 @@ namespace Ex03.ConsoleUI
                 }
             }
         }
+
         private bool tryGetUserInput(ref MenuOptions.eMenuOptions io_UserInput)
         {
             bool isValidInput;
+
             try
             {
                 io_UserInput = getUserInput();
@@ -57,12 +62,14 @@ namespace Ex03.ConsoleUI
 
             return isValidInput;
         }
+
         private static void printWelcome()
         {
             Console.WriteLine("Welcome to the Garage System!\nPress Enter to see the menu");
             Console.ReadLine();
             Console.Clear();
         }
+
         private static void printMenu()
         {
             Console.WriteLine("==== Garage Menu ====");
@@ -76,6 +83,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("8. Exit The System");
             Console.Write("Please select an option: ");
         }
+
         private void applyMenuOption(MenuOptions.eMenuOptions i_UserInput)
         {
             switch (i_UserInput)
@@ -106,10 +114,12 @@ namespace Ex03.ConsoleUI
                     break;
             }
         }
+
         private MenuOptions.eMenuOptions getUserInput()
         {
             String userInput = Console.ReadLine();
             MenuOptions.eMenuOptions resultUserChoice;
+
             if (int.TryParse(userInput, out int o_UserChoice))
             {
                 if ((o_UserChoice >= MenuOptions.GetMinOption()) && (o_UserChoice <= MenuOptions.GetMaxOption()))
@@ -128,10 +138,12 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
+
         private void addNewVehicleToTheGarage()
         {
             String licenseNumber, ownerName, ownerPhoneNumber;
             VehicleType.eVehicleType vechileType;
+
             Console.Write("Please enter license vehicle number: ");
             licenseNumber = Console.ReadLine();
             if (!vehicleIsInTheGrage(licenseNumber))
@@ -155,6 +167,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("Vehicle added successfully.");
             }
         }
+
         private void printVechileTypeMenu()
         {
             Console.WriteLine("Please enter car type:");
@@ -164,10 +177,12 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("4. Gasoline motorcycle");
             Console.WriteLine("5. Gasoline truck");
         }
+
         private VehicleType.eVehicleType getVechileType()
         {
             String vechileTypeChoice = Console.ReadLine();
             VehicleType.eVehicleType resultUserChoice;
+
             if (int.TryParse(vechileTypeChoice, out int o_UserChoice))
             {
                 if ((o_UserChoice >= VehicleType.GetMinOption()) && (o_UserChoice <= VehicleType.GetMaxOption()))
@@ -186,9 +201,11 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
+
         private bool vehicleIsInTheGrage(String i_LicenseNumber)
         {
             bool isInTheGarage = false;
+
             if (m_Garage.VehicleInGarage(i_LicenseNumber))
             {
                 Console.WriteLine("This vehicle is already exist in the garage, and has been updated to in repair status.");
@@ -198,6 +215,7 @@ namespace Ex03.ConsoleUI
 
             return isInTheGarage;
         }
+
         private void updateDetails(Vehicle i_Vehicle, VehicleType.eVehicleType i_VehicleType)
         {
             getVehicleModelName(i_Vehicle);
@@ -218,10 +236,13 @@ namespace Ex03.ConsoleUI
             }
             updateEnergy(i_Vehicle);
         }
+
         private void getVehicleModelName(Vehicle i_Vehicle)
         {
+            String modelName;
+
             Console.Write("Please enter car model name: ");
-            String modelName = Console.ReadLine();
+            modelName = Console.ReadLine();
             if (String.IsNullOrEmpty(modelName))
             {
                 throw new ArgumentException("Model name cannot be null or empty.");
@@ -231,15 +252,20 @@ namespace Ex03.ConsoleUI
                 i_Vehicle.ModelName = modelName;
             }
         }
+
         private void updateDetailsForCar(Car i_Car)
         {
+            Color.eColor carColor;
+            DoorsNumber.eDoorsNumber carDoorsNumber;
+
             printColorOptions();
-            Color.eColor carColor = getCarColor();
+            carColor = getCarColor();
             i_Car.Color = carColor;
             printDoorsOptions();
-            DoorsNumber.eDoorsNumber carDoorsNumber = getDoorsNumber();
+            carDoorsNumber = getDoorsNumber();
             i_Car.DoorsNumber = carDoorsNumber;
         }
+
         private void printColorOptions()
         {
             Console.WriteLine("Please enter car color: ");
@@ -248,10 +274,12 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("3. Gray");
             Console.WriteLine("4. White");
         }
+
         private Color.eColor getCarColor()
         {
             String carTypeChoice = Console.ReadLine();
             Color.eColor resultUserChoice;
+
             if (int.TryParse(carTypeChoice, out int o_UserChoice))
             {
                 if ((o_UserChoice >= Color.GetMinOption()) && (o_UserChoice <= Color.GetMaxOption()))
@@ -270,6 +298,7 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
+
         private void printDoorsOptions()
         {
             Console.WriteLine("Please enter car's doors number: ");
@@ -278,10 +307,12 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("3. Four doors");
             Console.WriteLine("4. Five doors");
         }
+
         private DoorsNumber.eDoorsNumber getDoorsNumber()
         {
             String carDoorChoice = Console.ReadLine();
             DoorsNumber.eDoorsNumber resultUserChoice;
+
             if (int.TryParse(carDoorChoice, out int o_UserChoice))
             {
                 if ((o_UserChoice >= DoorsNumber.GetMinOption()) && (o_UserChoice <= DoorsNumber.GetMaxOption()))
@@ -300,14 +331,18 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
+
         private void updateDetailsForMotorcycle(Motorcycle i_Motorcycle)
         {
+            LicenseType.eLicenseType licenseType;
+
             printMotorcycleLicenseTypeOptions();
-            LicenseType.eLicenseType licenseType = getLicenseType();
+            licenseType = getLicenseType();
             i_Motorcycle.LicenseType = licenseType;
             printMotorcycleEngineDisplacement();
             i_Motorcycle.EngineDisplacement = getEngineDisplacement();
         }
+
         private void printMotorcycleLicenseTypeOptions()
         {
             Console.WriteLine("Please enter motorcycle's license type: ");
@@ -316,10 +351,12 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("3. B1");
             Console.WriteLine("4. B2");
         }
+
         private LicenseType.eLicenseType getLicenseType()
         {
             String licenseTypeChoice = Console.ReadLine();
             LicenseType.eLicenseType resultUserChoice;
+
             if (int.TryParse(licenseTypeChoice, out int o_UserChoice))
             {
                 if ((o_UserChoice >= LicenseType.GetMinOption()) && (o_UserChoice <= LicenseType.GetMaxOption()))
@@ -338,13 +375,16 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
+
         private void printMotorcycleEngineDisplacement()
         {
             Console.Write("Please enter motorcycle's engine displacement: ");
         }
+
         private int getEngineDisplacement()
         {
             String EngineDisplacementChoice = Console.ReadLine();
+
             if (!int.TryParse(EngineDisplacementChoice, out int o_UserChoice))
             {
                 throw new FormatException("Must be an integer.\n");
@@ -352,6 +392,7 @@ namespace Ex03.ConsoleUI
 
             return o_UserChoice;
         }
+
         private void updateDetailsForTruck(Truck i_Truck)
         {
             printTruckTransportingRefrigeratedMaterials();
@@ -359,10 +400,12 @@ namespace Ex03.ConsoleUI
             printCargoVolume();
             i_Truck.CargoVolume = getCargoVolume();
         }
+
         private bool getTransportingRefrigeratedMaterials()
         {
             String transportingRefrigeratedMaterialsChoice = Console.ReadLine();
             bool resChoice;
+
             if (transportingRefrigeratedMaterialsChoice.ToUpper() == "Y")
             {
                 resChoice = true;
@@ -378,17 +421,21 @@ namespace Ex03.ConsoleUI
 
             return resChoice;
         }
+
         private void printTruckTransportingRefrigeratedMaterials()
         {
             Console.WriteLine("Please enter if the truck transporting refrigerated materials (Y/N): ");
         }
+
         private void printCargoVolume()
         {
             Console.WriteLine("Please enter cargo volume: ");
         }
+
         private float getCargoVolume()
         {
             String cargoVolume = Console.ReadLine();
+
             if (!float.TryParse(cargoVolume, out float o_UserChoice))
             {
                 throw new FormatException("Must be a float.\n");
@@ -396,8 +443,11 @@ namespace Ex03.ConsoleUI
 
             return o_UserChoice;
         }
+
         private void updateEnergy(Vehicle i_Vehicle)
         {
+            float currentEnergy;
+
             if (i_Vehicle.EnergyType is Gasoline)
             {
                 Console.Write("Please enter your current fuel amount (liters): ");
@@ -406,12 +456,14 @@ namespace Ex03.ConsoleUI
             {
                 Console.Write("Please enter your current battery amount (hours): ");
             }
-            float currentEnergy = getCurrentEenergyAmount();
+            currentEnergy = getCurrentEenergyAmount();
             i_Vehicle.EnergyType.CurrentCapacity = currentEnergy;
         }
+
         private float getCurrentEenergyAmount()
         {
             String currentEnergy = Console.ReadLine();
+
             if (!float.TryParse(currentEnergy, out float o_UserChoice))
             {
                 throw new FormatException("Must be a float.\n");
@@ -419,19 +471,23 @@ namespace Ex03.ConsoleUI
 
             return o_UserChoice;
         }
+
         private void getWheelsDetails(Vehicle i_Vehicle)
         {
             String wheelsManufacturerName;
             float wheelsCurrentAirPressure;
+
             Console.Write("Please enter your wheel's manufacturer name: ");
             wheelsManufacturerName = getManufacturerName();
             Console.Write("Please enter your wheel's current air pressure: ");
             wheelsCurrentAirPressure = getCurrentAirPressure();
             m_Garage.SetWheelsDetails(i_Vehicle.LicenseNumber, wheelsManufacturerName, wheelsCurrentAirPressure);
         }
+
         private String getManufacturerName()
         {
             String wheelsManufacturerName = Console.ReadLine();
+
             if (String.IsNullOrEmpty(wheelsManufacturerName))
             {
                 throw new ArgumentException("Manufacturer name cannot be null or empty.");
@@ -439,9 +495,11 @@ namespace Ex03.ConsoleUI
 
             return wheelsManufacturerName;
         }
+
         private float getCurrentAirPressure()
         {
             String wheelsCurrentAiPressure = Console.ReadLine();
+
             if (!float.TryParse(wheelsCurrentAiPressure, out float o_UserChoice))
             {
                 throw new FormatException("Must be a float.\n");
@@ -449,11 +507,14 @@ namespace Ex03.ConsoleUI
 
             return o_UserChoice;
         }
+
         private void showListOfLicenseNumbers()
         {
-            printLicenseNumberFilterOptions();
-            int filterOption = getStatusOption(k_WithFilterOption);
+            int filterOption;
             List<String> licenseNumbersList;
+
+            printLicenseNumberFilterOptions();
+            filterOption = getStatusOption(k_WithFilterOption);
             if (filterOption == k_NoFilter)
             {
                 licenseNumbersList = m_Garage.GetListOfAllLicensesNumbers();
@@ -464,6 +525,7 @@ namespace Ex03.ConsoleUI
             }
             printLicenseList(licenseNumbersList, filterOption);
         }
+
         private void printLicenseNumberFilterOptions()
         {
             Console.WriteLine("Enter your filter option: ");
@@ -472,10 +534,12 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("2. Fixed vehicles");
             Console.WriteLine("3. Paid vehicles");
         }
+
         private int getStatusOption(bool i_WithFilterOption)
         {
             String filterOption = Console.ReadLine();
             int resultUserChoice;
+
             if (int.TryParse(filterOption, out int o_UserChoice))
             {
                 if ((o_UserChoice >= VehicleStatus.GetMinOption()) && (o_UserChoice <= VehicleStatus.GetMaxOption()))
@@ -498,18 +562,22 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
+
         private void printList<T>(List<T> i_List)
         {
             int serialNumber = 1;
+
             foreach (T item in i_List)
             {
                 Console.WriteLine($"{serialNumber++}: {item}");
             }
         }
+
         private bool isEmptyList<T>(List<T> i_List)
         {
             return i_List.Count == 0;
         }
+
         private void printLicenseList(List<String> i_LicenseNumbersList, int i_FilterStatus)
         {
             if (isEmptyList(i_LicenseNumbersList))
@@ -529,6 +597,7 @@ namespace Ex03.ConsoleUI
                 printList(i_LicenseNumbersList);
             }
         }
+
         private void printReturnToMenu(bool i_ExitFromSystem)
         {
             if (!i_ExitFromSystem)
@@ -542,9 +611,11 @@ namespace Ex03.ConsoleUI
 
             Console.ReadLine();
         }
+
         private void changeVehicleStatus()
         {
             String licenseNumber = getLicenseNumber();
+
             if (!m_Garage.VehicleInGarage(licenseNumber))
             {
                 printVehicleNotInGarage(licenseNumber);
@@ -554,6 +625,7 @@ namespace Ex03.ConsoleUI
                 updateVehicleStatus(licenseNumber);
             }
         }
+
         private void printNewStatusOptions()
         {
             Console.WriteLine("Enter your new status option: ");
@@ -561,10 +633,13 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("2. Fixed vehicles");
             Console.WriteLine("3. Paid vehicles");
         }
+
         private String getLicenseNumber()
         {
+            String licenseNumber;
+
             Console.Write("Please enter license vehicle number: ");
-            String licenseNumber = Console.ReadLine();
+            licenseNumber = Console.ReadLine();
             if (String.IsNullOrEmpty(licenseNumber))
             {
                 throw new ArgumentException("License number cannot be null or empty.");
@@ -572,29 +647,37 @@ namespace Ex03.ConsoleUI
 
             return licenseNumber;
         }
+
         private void updateVehicleStatus(String i_LicenseNumber)
         {
+            VehicleStatus.eVehicleStatus statusOption;
+
             printNewStatusOptions();
-            VehicleStatus.eVehicleStatus statusOption = (VehicleStatus.eVehicleStatus)getStatusOption(!k_WithFilterOption);
+            statusOption = (VehicleStatus.eVehicleStatus)getStatusOption(!k_WithFilterOption);
             m_Garage.SetNewStatus(i_LicenseNumber, statusOption);
             Console.WriteLine($"The vehicle with license number: {i_LicenseNumber} has been successfully updated to status '{statusOption}'.");
         }
+
         private void printVehicleNotInGarage(String i_LicenseNumber)
         {
             Console.WriteLine($"The vehicle with license number: {i_LicenseNumber} is not in the garage");
         }
+
         private void inflateWheelsToMax()
         {
             String licenseNumber = getLicenseNumber();
+
             if (isVehicleInGarageOrNotify(licenseNumber))
             {
                 m_Garage.SetWheelsPressureToMax(licenseNumber);
                 Console.WriteLine($"The wheels on vehicle with license number: {licenseNumber} were successfully inflated to maximum pressure.");
             }
         }
+
         private bool isVehicleInGarageOrNotify(String i_LicenseNumber)
         {
             bool vehicleInGarage = true;
+
             if (!m_Garage.VehicleInGarage(i_LicenseNumber))
             {
                 vehicleInGarage = false;
@@ -603,23 +686,30 @@ namespace Ex03.ConsoleUI
 
             return vehicleInGarage;
         }
+
         private void refuelGasolineVehicle()
         {
             String licenseNumber = getLicenseNumber();
+
             if (isVehicleInGarageOrNotify(licenseNumber) && isGasolineVehicleOrNotify(licenseNumber))
             {
                 GasType.eGasType gasTypeChoice = getGasType();
+                float energyAmountChoice;
+
                 Console.Write("Please enter fuel amount: ");
-                float energyAmountChoice = getEnergyAmount();
+                energyAmountChoice = getEnergyAmount();
                 m_Garage.refuelVehicle(m_Garage.VehicleFilesDict[licenseNumber].Vehicle, energyAmountChoice, gasTypeChoice);
                 Console.WriteLine("The vehicle fueled successfully.");
             }
         }
+
         private GasType.eGasType getGasType()
         {
-            printGasTypeOptions();
-            String gasTypeChoice = Console.ReadLine();
+            String gasTypeChoice;
             GasType.eGasType resultUserChoice;
+
+            printGasTypeOptions();
+            gasTypeChoice = Console.ReadLine();
             if (int.TryParse(gasTypeChoice, out int o_UserChoice))
             {
                 if ((o_UserChoice >= GasType.GetMinOption()) && (o_UserChoice <= GasType.GetMaxOption()))
@@ -638,9 +728,11 @@ namespace Ex03.ConsoleUI
 
             return resultUserChoice;
         }
+
         private bool isGasolineVehicleOrNotify(String i_LicenseNumber)
         {
             bool isGasolineVehicle;
+
             isGasolineVehicle = m_Garage.VehicleFilesDict[i_LicenseNumber].Vehicle.EnergyType is Gasoline;
             if (!isGasolineVehicle)
             {
@@ -649,9 +741,11 @@ namespace Ex03.ConsoleUI
 
             return isGasolineVehicle;
         }
+
         private float getEnergyAmount()
         {
             String energyAmountChoice = Console.ReadLine();
+
             if (!float.TryParse(energyAmountChoice, out float o_UserChoice))
             {
                 throw new FormatException("Must be a float.\n");
@@ -659,6 +753,7 @@ namespace Ex03.ConsoleUI
 
             return o_UserChoice;
         }
+
         private void printGasTypeOptions()
         {
             Console.WriteLine("Please enter gas type: ");
@@ -667,9 +762,11 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("3. Octan96");
             Console.WriteLine("4. Octan98");
         }
+
         private void chargingElectricVehicle()
         {
             String licenseNumber = getLicenseNumber();
+
             if (isVehicleInGarageOrNotify(licenseNumber) && isElectricVehicleOrNotify(licenseNumber))
             {
                 Console.Write("Please enter the number of battery hours for charging: ");
@@ -678,9 +775,11 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("The vehicle charged successfully.");
             }
         }
+
         private bool isElectricVehicleOrNotify(String i_LicenseNumber)
         {
             bool isElectricVehicle;
+
             isElectricVehicle = m_Garage.VehicleFilesDict[i_LicenseNumber].Vehicle.EnergyType is Electric;
             if (!isElectricVehicle)
             {
@@ -689,14 +788,17 @@ namespace Ex03.ConsoleUI
 
             return isElectricVehicle;
         }
+
         private void showVehicleDetails()
         {
             String licenseNumber = getLicenseNumber();
+
             if (isVehicleInGarageOrNotify(licenseNumber))
             {
                 displayVehicleData(licenseNumber);
             }
         }
+
         private void displayVehicleData(String i_LicenseNumber)
         {
             Console.WriteLine("============================================");
@@ -705,6 +807,7 @@ namespace Ex03.ConsoleUI
             displayVechileDetails(i_LicenseNumber);
             displayVechileEnergyType(i_LicenseNumber);
         }
+
         private void displayVechileDetails(String i_LicenseNumber)
         {
             foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict[i_LicenseNumber].Vehicle.ShowVehicle())
@@ -712,6 +815,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine($"{kvp.Key}{kvp.Value}");
             }
         }
+
         private void displayVechileTypeDetails(String i_LicenseNumber)
         {
             foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict[i_LicenseNumber].Vehicle.ShowDetails())
@@ -719,6 +823,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine($"{kvp.Key}{kvp.Value}");
             }
         }
+
         private void displayVechileEnergyType(String i_LicenseNumber)
         {
             foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict[i_LicenseNumber].Vehicle.EnergyType.ShowEnergyType())
@@ -726,6 +831,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine($"{kvp.Key}{kvp.Value}");
             }
         }
+
         private void displayVechileFileDetails(String i_LicenseNumber)
         {
             foreach (KeyValuePair<string, string> kvp in m_Garage.VehicleFilesDict[i_LicenseNumber].ShowVehicleFile())

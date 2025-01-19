@@ -14,6 +14,7 @@ namespace Ex03.GarageLogic
         public static EnergyType CreateEnergyType(VehicleType.eVehicleType i_VehicleType)
         {
             EnergyType energyType;
+
             switch (i_VehicleType)
             {
                 case VehicleType.eVehicleType.GasolineCar:
@@ -40,6 +41,7 @@ namespace Ex03.GarageLogic
         public static Vehicle BuildNewVehicle(string i_LicenseNumber, VehicleType.eVehicleType i_VehicleType)
         {
             Vehicle newVehicle;
+
             switch (i_VehicleType)
             {
                 case VehicleType.eVehicleType.GasolineCar:

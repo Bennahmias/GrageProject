@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic
             PhoneNumber = i_PhoneNumber;
             Status = VehicleStatus.eVehicleStatus.InRepair;
         }
+
         public string OwnerName
         {
             get { return m_OwnerName; }
@@ -28,6 +29,7 @@ namespace Ex03.GarageLogic
                 m_OwnerName = value;
             }
         }
+
         public string PhoneNumber
         {
             get { return m_PhoneNumber; }
@@ -40,25 +42,30 @@ namespace Ex03.GarageLogic
                 m_PhoneNumber = value;
             }
         }
+
         public Vehicle Vehicle
         {
             get { return m_Vehicle; }
             set { m_Vehicle = value; }
         }
+
         public VehicleStatus.eVehicleStatus Status
         {
             get { return m_Status; }
             set { m_Status = value; }
         }
+
         public Dictionary<String, String> ShowVehicleFile()
         {
             Dictionary<String, String> vehicleFileDetails =
                 new Dictionary<String, String>(6);
+
             vehicleFileDetails.Add("Owner name: ", OwnerName.ToString());
             vehicleFileDetails.Add("Phone number: ", PhoneNumber.ToString());
             vehicleFileDetails.Add("Status: ", Status.ToString());
 
             return vehicleFileDetails;
         }
+
     }
 }

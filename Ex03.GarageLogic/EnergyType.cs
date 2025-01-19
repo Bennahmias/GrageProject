@@ -13,10 +13,12 @@ namespace Ex03.GarageLogic
         {
             r_MaxCapacity = i_MaxCapacity;
         }
+
         public float MaxCapacity
         {
             get { return r_MaxCapacity; }
         }
+
         public float CurrentCapacity
         {
             get { return m_CurrentCapacity; }
@@ -33,14 +35,17 @@ namespace Ex03.GarageLogic
                 }
             }
         }
+
         public float EnergyPercentage
         {
             get { return m_EnergyPercentage; }
         }
+
         public void SetEnergyPercentage()
         {
             m_EnergyPercentage = (CurrentCapacity / MaxCapacity) * 100;
         }
+
         public abstract Dictionary<String, String> ShowEnergyType();
     }
 }

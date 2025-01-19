@@ -12,24 +12,29 @@ namespace Ex03.GarageLogic
 
         public Car(string i_LicenseNumber, EnergyType i_EnergyType)
             : base(i_LicenseNumber, i_EnergyType, k_NumberOfWheels, k_MaxAirPressure) { }
+
         public Color.eColor Color
         {
             get { return m_Color; }
             set { m_Color = value; }
         }
+
         public DoorsNumber.eDoorsNumber DoorsNumber
         {
             get { return m_DoorsNumber; }
             set { m_DoorsNumber = value; }
         }
+
         public override Dictionary<String, String> ShowDetails()
         {
             Dictionary<String, String> carDetails =
                 new Dictionary<String, String>(2);
+
             carDetails.Add("Color: ", Color.ToString());
             carDetails.Add("Doors number: ", DoorsNumber.ToString());
 
             return carDetails;
         }
+
     }
 }
