@@ -36,7 +36,8 @@ namespace Ex03.ConsoleUI
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message + Environment.NewLine);
+
                     }
                     printReturnToMenu(m_ExitFromSystem);
                     Console.Clear();
@@ -65,7 +66,8 @@ namespace Ex03.ConsoleUI
 
         private static void printWelcome()
         {
-            Console.WriteLine("Welcome to the Garage System!\nPress Enter to see the menu");
+            Console.WriteLine("Welcome to the Garage System!");
+            Console.WriteLine("Press Enter to see the menu");
             Console.ReadLine();
             Console.Clear();
         }
@@ -133,7 +135,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ArgumentException("Invalid input, must be a number from the menu, try again!\n");
+                throw new ArgumentException("Invalid input, must be a number from the menu, try again!");
             }
 
             return resultUserChoice;
@@ -196,7 +198,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ArgumentException("Invalid input\n");
+                throw new ArgumentException("Invalid input");
             }
 
             return resultUserChoice;
@@ -293,7 +295,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ArgumentException("Invalid input\n");
+                throw new ArgumentException("Invalid input");
             }
 
             return resultUserChoice;
@@ -326,7 +328,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ArgumentException("Invalid input\n");
+                throw new ArgumentException("Invalid input");
             }
 
             return resultUserChoice;
@@ -370,7 +372,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ArgumentException("Invalid input\n");
+                throw new ArgumentException("Invalid input");
             }
 
             return resultUserChoice;
@@ -387,7 +389,7 @@ namespace Ex03.ConsoleUI
 
             if (!int.TryParse(EngineDisplacementChoice, out int o_UserChoice))
             {
-                throw new FormatException("Must be an integer.\n");
+                throw new FormatException("Must be an integer.");
             }
 
             return o_UserChoice;
@@ -416,7 +418,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new FormatException("Must be an Y or N.\n");
+                throw new FormatException("Must be an Y or N.");
             }
 
             return resChoice;
@@ -438,7 +440,7 @@ namespace Ex03.ConsoleUI
 
             if (!float.TryParse(cargoVolume, out float o_UserChoice))
             {
-                throw new FormatException("Must be a float.\n");
+                throw new FormatException("Must be a float.");
             }
 
             return o_UserChoice;
@@ -466,7 +468,7 @@ namespace Ex03.ConsoleUI
 
             if (!float.TryParse(currentEnergy, out float o_UserChoice))
             {
-                throw new FormatException("Must be a float.\n");
+                throw new FormatException("Must be a float.");
             }
 
             return o_UserChoice;
@@ -502,7 +504,7 @@ namespace Ex03.ConsoleUI
 
             if (!float.TryParse(wheelsCurrentAiPressure, out float o_UserChoice))
             {
-                throw new FormatException("Must be a float.\n");
+                throw new FormatException("Must be a float.");
             }
 
             return o_UserChoice;
@@ -557,7 +559,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ArgumentException("Invalid input\n");
+                throw new ArgumentException("Invalid input");
             }
 
             return resultUserChoice;
@@ -723,7 +725,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ArgumentException("Invalid input\n");
+                throw new ArgumentException("Invalid input");
             }
 
             return resultUserChoice;
@@ -748,7 +750,7 @@ namespace Ex03.ConsoleUI
 
             if (!float.TryParse(energyAmountChoice, out float o_UserChoice))
             {
-                throw new FormatException("Must be a float.\n");
+                throw new FormatException("Must be a float.");
             }
 
             return o_UserChoice;
